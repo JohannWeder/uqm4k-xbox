@@ -3832,6 +3832,13 @@ DoSolarSysMenu (MENU_STATE *pMS)
 	if (LastActivity == CHECK_LOAD)
 		select = TRUE; // Selected LOAD from main menu
 
+	if (!select && PulsedInputState.menu[KEY_MENU_CANCEL])
+	{	// Cancel acts as a shortcut for NAVIGATE (resume flight)
+		SetFlashRect (NULL, FALSE);
+		pMS->CurState = NAVIGATION;
+		return FALSE;
+	}
+
 	if (!select)
 		return TRUE;
 

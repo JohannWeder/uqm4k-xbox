@@ -653,6 +653,13 @@ DoPlanetOrbit (MENU_STATE *pMS)
 	if (handled)
 		return TRUE;
 
+	if (PulsedInputState.menu[KEY_MENU_CANCEL])
+	{	// Cancel acts as a shortcut for NAVIGATE (leave orbit)
+		SetFlashRect (NULL, FALSE);
+		pMS->CurState = NAVIGATION;
+		return FALSE;
+	}
+
 	if (!select)
 		return TRUE;
 
