@@ -169,6 +169,7 @@ struct options_struct
 	DECL_CONFIG_OPTION(bool,  volasMusic);
 	DECL_CONFIG_OPTION(bool,  wholeFuel);
 	DECL_CONFIG_OPTION(int,   dirJoyP1);
+	DECL_CONFIG_OPTION(int,   landerJoy);
 	DECL_CONFIG_OPTION(int,   landerHold);
 	DECL_CONFIG_OPTION(int,   scrTrans);
 	DECL_CONFIG_OPTION(int,   optDifficulty);
@@ -319,6 +320,7 @@ static const char *boolOptString (const struct bool_option *option);
 static const char *boolNotOptString (const struct bool_option *option);
 #ifdef UQM_UWP
 static void setUwpDefaultDirs (struct options_struct *options);
+static void setUwpDefaultOptions (struct options_struct *options);
 #endif
 
 #ifdef ANDROID
@@ -343,12 +345,7 @@ int main(int argc, char** argv)
 		INIT_CONFIG_OPTION(  scanlines,         false ),
 		INIT_CONFIG_OPTION(  scaler,            0 ),
 		INIT_CONFIG_OPTION(  showFps,           false ),
-#ifdef UQM_UWP
-		// Stretch to fill a 16:9 TV/monitor (Xbox)
-		INIT_CONFIG_OPTION(  keepAspectRatio,   0 ),
-#else
 		INIT_CONFIG_OPTION(  keepAspectRatio,   1 ),
-#endif
 		INIT_CONFIG_OPTION(  gamma,             1.0f ),
 		INIT_CONFIG_OPTION(  soundDriver,       audio_DRIVER_MIXSDL ),
 		INIT_CONFIG_OPTION(  soundQuality,      audio_QUALITY_HIGH ),
@@ -369,14 +366,8 @@ int main(int argc, char** argv)
 		INIT_CONFIG_OPTION(  speechVolumeScale, 1.0f ),
 		INIT_CONFIG_OPTION(  safeMode,          false ),
 		// Begin MegaMod defaults
-#ifdef UQM_UWP
-		// HD (falls back to SD if the HD pack is missing), largest scale
-		INIT_CONFIG_OPTION(  resolutionFactor,  2 ),
-		INIT_CONFIG_OPTION(  loresBlowupScale,  5),
-#else
 		INIT_CONFIG_OPTION(  resolutionFactor,  0 ),
 		INIT_CONFIG_OPTION(  loresBlowupScale,  1),
-#endif
 		INIT_CONFIG_OPTION(  cheatMode,         false ),
 		INIT_CONFIG_OPTION(  optGodModes,       0 ),
 		INIT_CONFIG_OPTION(  timeDilationScale, 0 ),
@@ -404,6 +395,8 @@ int main(int argc, char** argv)
 		INIT_CONFIG_OPTION(  volasMusic,        false ),
 		INIT_CONFIG_OPTION(  wholeFuel,         false ),
 		INIT_CONFIG_OPTION(  dirJoyP1,          0 ),
+		// Lander faces the left stick; full push thrusts
+		INIT_CONFIG_OPTION(  landerJoy,         3 ),
 		INIT_CONFIG_OPTION(  landerHold,        OPT_3DO ),
 		INIT_CONFIG_OPTION(  scrTrans,          OPT_3DO ),
 		INIT_CONFIG_OPTION(  optDifficulty,     0 ),
@@ -469,6 +462,7 @@ int main(int argc, char** argv)
 	optionsResult = parseOptions (argc, argv, &options);
 #ifdef UQM_UWP
 	setUwpDefaultDirs (&options);
+	setUwpDefaultOptions (&options);
 	// Mark the system Back request (the B button on Xbox) as handled, so
 	// the system doesn't suspend the app; the game reads B as Cancel.
 	SDL_SetHint (SDL_HINT_WINRT_HANDLE_BACK_BUTTON, "1");
@@ -650,6 +644,7 @@ int main(int argc, char** argv)
 	optVolasMusic = options.volasMusic.value;
 	optWholeFuel = options.wholeFuel.value;
 	optDirJoy[0] = options.dirJoyP1.value;
+	optLanderJoy = options.landerJoy.value;
 	optLanderHold = options.landerHold.value;
 	optScrTrans = options.scrTrans.value;
 	optDifficulty = options.optDifficulty.value;
@@ -910,6 +905,44 @@ setUwpDefaultDirs (struct options_struct *options)
 		snprintf (logPath, sizeof logPath, "%s/uqm.log", localDir);
 		options->logFile = logPath;
 	}
+}
+
+// Default settings for the UWP (Xbox) build. Command-line options and the
+// saved config still take precedence.
+static void
+setUwpDefaultOptions (struct options_struct *options)
+{
+#define UWP_DEFAULT(name, val) \
+		do { if (!options->name.set) options->name.value = (val); } while (0)
+
+	// Display: HD (falls back to SD if the HD pack is missing), largest
+	// scale, stretched to fill a 16:9 TV
+	UWP_DEFAULT (resolutionFactor,   2);
+	UWP_DEFAULT (loresBlowupScale,   5);
+	UWP_DEFAULT (keepAspectRatio,    0);
+
+	// 3DO-style presentation
+	UWP_DEFAULT (whichIntro,         OPT_3DO);
+	UWP_DEFAULT (whichShield,        OPT_3DO);
+	UWP_DEFAULT (smoothScroll,       OPT_3DO);
+	UWP_DEFAULT (whichCoarseScan,    3);
+	UWP_DEFAULT (flagshipColor,      OPT_3DO);
+
+	// Visual enhancements
+	UWP_DEFAULT (nebulae,            true);
+	UWP_DEFAULT (orbitingPlanets,    true);
+	UWP_DEFAULT (texturedPlanets,    true);
+	UWP_DEFAULT (hyperStars,         true);
+	UWP_DEFAULT (hazardColors,       true);
+	UWP_DEFAULT (starBackground,     3);
+	UWP_DEFAULT (unscaledStarSystem, true);
+
+	// Gameplay / interface
+	UWP_DEFAULT (gameOver,           true);
+	UWP_DEFAULT (showUpgrades,       true);
+	UWP_DEFAULT (captainNames,       true);
+
+#undef UWP_DEFAULT
 }
 #endif
 
@@ -1196,6 +1229,11 @@ getUserConfigOptions (struct options_struct *options)
 	if (res_IsInteger ("mm.dirJoyP1") && !options->dirJoyP1.set)
 	{
 		options->dirJoyP1.value = res_GetInteger ("mm.dirJoyP1");
+	}
+
+	if (res_IsInteger ("mm.landerJoy") && !options->landerJoy.set)
+	{
+		options->landerJoy.value = res_GetInteger ("mm.landerJoy");
 	}
 
 	/*getBoolConfigValueXlat (&options->landerHold, "mm.landerHold",

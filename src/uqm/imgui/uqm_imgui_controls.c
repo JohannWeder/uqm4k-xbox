@@ -141,6 +141,12 @@ draw_controls_menu (void)
 
 	Spacer ();
 
+	// Lander Stick Control
+	UQM_ComboChar (ImStr (GEN_CON_STR_BASE + 32), dir_joy_disp, 5,
+			&optLanderJoy, "mm.landerJoy", false);
+
+	Spacer ();
+
 	// Crappy Mouse Input
 	UQM_ComboChar (ImStr (GEN_CON_STR_BASE + 10), cmouse_input, 3,
 			&optMouseInput, "mm.mouseInput", false);

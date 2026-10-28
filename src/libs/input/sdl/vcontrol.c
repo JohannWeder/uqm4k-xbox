@@ -1097,12 +1097,12 @@ VControl_ProcessJoyAxis (int port, int axis, int value)
 			if (axis < 0 || axis >= j->numaxes)
 				return;
 
-			if (logical_port >=0 && optDirJoy[logical_port] && DirJoyActive)
+			if (logical_port >=0 && DirJoyActive)
 			{
-				if (((optDirJoy[logical_port] == 1 ||
-					optDirJoy[logical_port] == 3) && axis < 2) ||
-					((optDirJoy[logical_port] == 2 ||
-					optDirJoy[logical_port] == 4) && (axis > 1 && axis < 4)))
+				int mode = GetDirJoyMode (logical_port);
+
+				if (((mode == 1 || mode == 3) && axis < 2) ||
+					((mode == 2 || mode == 4) && (axis > 1 && axis < 4)))
 				{
 					return;
 				}

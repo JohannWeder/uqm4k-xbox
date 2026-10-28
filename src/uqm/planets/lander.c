@@ -3018,6 +3018,7 @@ PlanetSide (POINT planetLoc)
 	PLANETSIDE_DESC PSD;
 
 	DirJoyActive = TRUE;
+	LanderJoyActive = TRUE;
 
 	memset (&PSD, 0, sizeof (PSD));
 	PSD.InTransit = TRUE;
@@ -3169,6 +3170,7 @@ PlanetSide (POINT planetLoc)
 	SetMenuSounds (MENU_SOUND_ARROWS, MENU_SOUND_SELECT);
 
 	DirJoyActive = FALSE;
+	LanderJoyActive = FALSE;
 }
 
 static void

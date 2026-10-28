@@ -98,6 +98,7 @@ int optSpaceMusic;
 OPT_ENABLABLE optVolasMusic;
 OPT_ENABLABLE optWholeFuel;
 int optDirJoy[2];
+int optLanderJoy;
 bool changeLanderCapacity;
 int optLanderHold;
 int optScrTrans;
@@ -178,6 +179,7 @@ char baseContentPath[PATH_MAX];
 ADDON_COUNT addonList;
 
 BOOLEAN DirJoyActive = FALSE;
+BOOLEAN LanderJoyActive = FALSE;
 BOOLEAN inDeadZoneMenu = FALSE;
 
 extern uio_Repository *repository;
@@ -935,4 +937,15 @@ UQM_SetCursor (int cursor)
 		SDL_ShowCursor (SDL_ENABLE);
 
 	return TRUE;
+}
+
+// Directional joystick mode currently in effect for 'player': the lander
+// has its own setting, used while on a planet surface.
+int
+GetDirJoyMode (int player)
+{
+	if (LanderJoyActive && player == 0)
+		return optLanderJoy;
+
+	return optDirJoy[player];
 }

@@ -316,6 +316,7 @@ enum {
 	CHOICE_SCRSHOTS,
 	CHOICE_HIVISORBITS,
 	CHOICE_HIVISPLANETS,
+	CHOICE_LANDERJOY,
 
 	CHOICE_COUNT
 };
@@ -486,6 +487,7 @@ typedef struct globalopts_struct {
 	OPT_SPACEMUSIC spaceMusic;
 	OPT_ADD_REMOVE deviceArray[28], upgradeArray[NUM_UPGRADES];
 	OPT_DIRECTJOY dirJoy[2];
+	OPT_DIRECTJOY landerJoy;
 	OPT_ENABLABLE fullscreen, subtitles, scanlines, fps, stereo, music3do,
 			musicremix, speech, cheatMode, mainMenuMusic,
 			nebulae, orbitingPlanets, texturedPlanets, godMode, bubbleWarp,

@@ -38,7 +38,7 @@ extern STRING ImGuiStrings;
 #define GEN_GFX_STR_COUNT  16
 #define GEN_ENG_STR_COUNT  36
 #define GEN_AUD_STR_COUNT  18
-#define GEN_CON_STR_COUNT  32
+#define GEN_CON_STR_COUNT  33
 #define GEN_ADV_STR_COUNT  14
 
 // Enhancements

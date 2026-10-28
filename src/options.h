@@ -84,6 +84,7 @@ extern int optSpaceMusic;
 extern OPT_ENABLABLE optVolasMusic;
 extern OPT_ENABLABLE optWholeFuel;
 extern int optDirJoy[2];
+extern int optLanderJoy;
 extern bool changeLanderCapacity;
 extern int optLanderHold;
 extern int optScrTrans;
@@ -169,6 +170,7 @@ extern char *configDirPath;
 extern const char **optAddons;
 
 extern BOOLEAN DirJoyActive;
+extern BOOLEAN LanderJoyActive;
 extern BOOLEAN inDeadZoneMenu;
 
 // addon availability
@@ -235,6 +237,8 @@ enum
 extern SDL_Cursor *UQM_Cursors[NUM_CURSORS];
 
 extern BOOLEAN UQM_SetCursor (int cursor);
+
+extern int GetDirJoyMode (int player);
 
 #if defined(__cplusplus)
 }

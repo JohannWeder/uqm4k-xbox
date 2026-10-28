@@ -313,6 +313,7 @@ static WIDGET *keyconfig_widgets[] = {
 	(WIDGET *)(&choices[CHOICE_INPDEVICE ]), // Control Display
 	(WIDGET *)(&choices[CHOICE_DIRJOYP1  ]), // Directional Joystick P1
 	(WIDGET *)(&choices[CHOICE_DIRJOYP2  ]), // Directional Joystick P2
+	(WIDGET *)(&choices[CHOICE_LANDERJOY ]), // Lander Stick Control
 	(WIDGET *)(&choices[CHOICE_MOUSEINPUT]), // Mouse Input
 	(WIDGET *)(&choices[CHOICE_BATMOUSE  ]), // Battle Mouse Input
 
@@ -1510,6 +1511,7 @@ SetDefaults (void)
 	choices[CHOICE_FLEETPOINT   ].selected = opts.fleetPointSys;
 	choices[CHOICE_HSCOLOR      ].selected = opts.hyperSpaceColor;
 	choices[CHOICE_DIRJOYP2     ].selected = opts.dirJoy[1];
+	choices[CHOICE_LANDERJOY    ].selected = opts.landerJoy;
 
 	// Devices
 	for (i = DEVICE_START; i < DEVICE_START
@@ -1643,6 +1645,7 @@ PropagateResults (void)
 	opts.fleetPointSys =    choices[CHOICE_FLEETPOINT   ].selected;
 	opts.hyperSpaceColor =  choices[CHOICE_HSCOLOR      ].selected;
 	opts.dirJoy[1] =        choices[CHOICE_DIRJOYP2     ].selected;
+	opts.landerJoy =        choices[CHOICE_LANDERJOY    ].selected;
 
 	// Devices
 	for (i = DEVICE_START;
@@ -3167,6 +3170,7 @@ GetGlobalOptions (GLOBALOPTS *opts)
 	opts->controllerType = optControllerType;
 	opts->dirJoy[0] = optDirJoy[0];
 	opts->dirJoy[1] = optDirJoy[1];
+	opts->landerJoy = optLanderJoy;
 	opts->deadZoneLeftStick[0] = deadzoneToSlider (DeadZoneLeftStick[0]);
 	opts->deadZoneRightStick[0] = deadzoneToSlider (DeadZoneRightStick[0]);
 	opts->deadZoneLeftStick[1] = deadzoneToSlider (DeadZoneLeftStick[1]);
@@ -3491,6 +3495,7 @@ SetGlobalOptions (GLOBALOPTS *opts)
 	PutIntOpt (&optControllerType, (int *)(&opts->controllerType), "mm.controllerType", FALSE);
 	PutIntOpt (&optDirJoy[0], (int *)(&opts->dirJoy[0]), "mm.dirJoyP1", FALSE);
 	PutIntOpt (&optDirJoy[1], (int *)(&opts->dirJoy[1]), "mm.dirJoyP2", FALSE);
+	PutIntOpt (&optLanderJoy, (int *)(&opts->landerJoy), "mm.landerJoy", FALSE);
 
 	res_PutInteger ("mm.deadZoneLeftP1", DeadZoneLeftStick[0]);
 	res_PutInteger ("mm.deadZoneRightP1", DeadZoneRightStick[0]);
