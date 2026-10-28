@@ -88,11 +88,15 @@ mkdirhier (const char *path)
 
 		ptr[0] = '/';
 		ptr[1] = '\0';
+#ifndef UQM_UWP
+		// Skipped on UWP: the sandbox (e.g. Xbox, "Q:/") hides the drive
+		// root from stat(). A bad drive still fails when creating dirs.
 		if (stat (buf, &statbuf) == -1)
 		{
 			log_add (log_Error, "Can't stat \"%s\": %s", buf, strerror (errno));
 			goto err;
 		}
+#endif
 	}
 	else
 #endif  /* HAVE_DRIVE_LETTERS */
@@ -193,7 +197,9 @@ mkdirhier (const char *path)
 	// create all components left
 	while (1)
 	{
-		if (createDirectory (buf, 0777) == -1)
+		// EEXIST is not an error: a sandbox (e.g. UWP) may report a parent
+		// dir as nonexistent to stat() even though it does exist.
+		if (createDirectory (buf, 0777) == -1 && errno != EEXIST)
 		{
 			log_add (log_Error, "Error: Can't create %s: %s", buf,
 					strerror (errno));

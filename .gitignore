@@ -278,6 +278,8 @@ log.txt
 *.exe
 !dev-lib/**
 /dev-lib/.*
+/dev-lib/uwp-src/
+/build/uwp/out/
 !doc/[^.]*
 .DS_Store
 *.tlog

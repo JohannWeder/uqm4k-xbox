@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Static library with the third-party C libraries UQM needs, built for UWP:
+  zlib, libpng, libogg, libvorbis (+vorbisfile).  Sources are downloaded to
+  dev-lib\uwp-src (not in git); see build\uwp\README.md.
+-->
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{14014215-1484-4F0B-9172-905657ACA188}</ProjectGuid>
+    <Keyword>StaticLibrary</Keyword>
+    <RootNamespace>uqmdeps</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <SrcRoot>$(MSBuildThisFileDirectory)..\..\..\dev-lib\uwp-src\</SrcRoot>
+    <ZlibDir>$(SrcRoot)zlib\zlib-1.3.1\</ZlibDir>
+    <PngDir>$(SrcRoot)libpng\libpng-1.6.43\</PngDir>
+    <OggDir>$(SrcRoot)libogg\ogg-1.3.5\</OggDir>
+    <VorbisDir>$(SrcRoot)libvorbis\vorbis-1.3.7\</VorbisDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <OutDir>$(MSBuildThisFileDirectory)..\out\$(Platform)\$(Configuration)\deps\</OutDir>
+    <IntDir>$(MSBuildThisFileDirectory)..\out\$(Platform)\$(Configuration)\deps\obj\</IntDir>
+    <TargetName>uqm-deps</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <SDLCheck>false</SDLCheck>
+      <WarningLevel>Level1</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory);$(ZlibDir);$(PngDir);$(OggDir)include;$(VorbisDir)include;$(VorbisDir)lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4244;4267;4996;4305;4018</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup Label="zlib">
+    <ClCompile Include="$(ZlibDir)adler32.c" />
+    <ClCompile Include="$(ZlibDir)compress.c" />
+    <ClCompile Include="$(ZlibDir)crc32.c" />
+    <ClCompile Include="$(ZlibDir)deflate.c" />
+    <ClCompile Include="$(ZlibDir)gzclose.c" />
+    <ClCompile Include="$(ZlibDir)gzlib.c" />
+    <ClCompile Include="$(ZlibDir)gzread.c" />
+    <ClCompile Include="$(ZlibDir)gzwrite.c" />
+    <ClCompile Include="$(ZlibDir)infback.c" />
+    <ClCompile Include="$(ZlibDir)inffast.c" />
+    <ClCompile Include="$(ZlibDir)inflate.c" />
+    <ClCompile Include="$(ZlibDir)inftrees.c" />
+    <ClCompile Include="$(ZlibDir)trees.c" />
+    <ClCompile Include="$(ZlibDir)uncompr.c" />
+    <ClCompile Include="$(ZlibDir)zutil.c" />
+  </ItemGroup>
+  <ItemGroup Label="libpng">
+    <ClCompile Include="$(PngDir)png.c" />
+    <ClCompile Include="$(PngDir)pngerror.c" />
+    <ClCompile Include="$(PngDir)pngget.c" />
+    <ClCompile Include="$(PngDir)pngmem.c" />
+    <ClCompile Include="$(PngDir)pngpread.c" />
+    <ClCompile Include="$(PngDir)pngread.c" />
+    <ClCompile Include="$(PngDir)pngrio.c" />
+    <ClCompile Include="$(PngDir)pngrtran.c" />
+    <ClCompile Include="$(PngDir)pngrutil.c" />
+    <ClCompile Include="$(PngDir)pngset.c" />
+    <ClCompile Include="$(PngDir)pngtrans.c" />
+    <ClCompile Include="$(PngDir)pngwio.c" />
+    <ClCompile Include="$(PngDir)pngwrite.c" />
+    <ClCompile Include="$(PngDir)pngwtran.c" />
+    <ClCompile Include="$(PngDir)pngwutil.c" />
+  </ItemGroup>
+  <ItemGroup Label="libogg">
+    <ClCompile Include="$(OggDir)src\bitwise.c" />
+    <ClCompile Include="$(OggDir)src\framing.c" />
+  </ItemGroup>
+  <ItemGroup Label="libvorbis">
+    <ClCompile Include="$(VorbisDir)lib\analysis.c" />
+    <ClCompile Include="$(VorbisDir)lib\bitrate.c" />
+    <ClCompile Include="$(VorbisDir)lib\block.c" />
+    <ClCompile Include="$(VorbisDir)lib\codebook.c" />
+    <ClCompile Include="$(VorbisDir)lib\envelope.c" />
+    <ClCompile Include="$(VorbisDir)lib\floor0.c" />
+    <ClCompile Include="$(VorbisDir)lib\floor1.c" />
+    <ClCompile Include="$(VorbisDir)lib\info.c" />
+    <ClCompile Include="$(VorbisDir)lib\lookup.c" />
+    <ClCompile Include="$(VorbisDir)lib\lpc.c" />
+    <ClCompile Include="$(VorbisDir)lib\lsp.c" />
+    <ClCompile Include="$(VorbisDir)lib\mapping0.c" />
+    <ClCompile Include="$(VorbisDir)lib\mdct.c" />
+    <ClCompile Include="$(VorbisDir)lib\psy.c" />
+    <ClCompile Include="$(VorbisDir)lib\registry.c" />
+    <ClCompile Include="$(VorbisDir)lib\res0.c" />
+    <ClCompile Include="$(VorbisDir)lib\sharedbook.c" />
+    <ClCompile Include="$(VorbisDir)lib\smallft.c" />
+    <ClCompile Include="$(VorbisDir)lib\synthesis.c" />
+    <ClCompile Include="$(VorbisDir)lib\vorbisenc.c" />
+    <ClCompile Include="$(VorbisDir)lib\vorbisfile.c" />
+    <ClCompile Include="$(VorbisDir)lib\window.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

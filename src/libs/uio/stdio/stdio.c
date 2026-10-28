@@ -48,6 +48,45 @@
 #ifdef uio_MEM_DEBUG
 #	include "../memdebug.h"
 #endif
+#ifdef UQM_UWP
+#	include <SDL.h>
+#endif
+
+#ifdef UQM_UWP
+// UWP apps cannot stat() the dirs above their own sandbox dirs (such as
+// C:\Users), even though those exist; stat() reports ENOENT. Returns
+// whether 'path' is such an ancestor of the app's local or install folder,
+// so that paths can still be resolved down to the folders the app is
+// allowed to access.
+static int
+stdio_isSandboxAncestor(const char *path) {
+	const char *roots[2];
+	size_t i;
+
+	roots[0] = SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_LOCAL_FOLDER);
+	roots[1] = SDL_WinRTGetFSPathUTF8(SDL_WINRT_PATH_INSTALLED_LOCATION);
+
+	for (i = 0; i < 2; i++) {
+		const char *p = path;
+		const char *r = roots[i];
+
+		if (r == NULL)
+			continue;
+		for (; *p != '\0' && *r != '\0'; p++, r++) {
+			int pc = (*p == '\\') ? '/' : tolower((unsigned char) *p);
+			int rc = (*r == '\\') ? '/' : tolower((unsigned char) *r);
+			if (pc != rc)
+				break;
+		}
+		// 'path' must end exactly at a component boundary inside the root
+		// (either before a separator, or just after one, as in "Q:/").
+		if (*p == '\0' && *r != '\0' && (*r == '/' || *r == '\\'
+				|| (p > path && (p[-1] == '/' || p[-1] == '\\'))))
+			return 1;
+	}
+	return 0;
+}
+#endif  /* UQM_UWP */
 
 static inline uio_GPFile *stdio_addFile(uio_GPDir *gPDir,
 		const char *fileName);
@@ -441,6 +480,12 @@ stdio_getPDirEntryHandle(const uio_PDirHandle *pDirHandle, const char *name) {
 			statBuf.st_mode = S_IFDIR;
 					// Fake a directory; the other fields of the stat
 					// structure are unused.
+		} else
+#endif
+#ifdef UQM_UWP
+		if (stdio_isSandboxAncestor(path)) {
+			statBuf.st_mode = S_IFDIR;
+					// Fake a directory; see stdio_isSandboxAncestor().
 		} else
 #endif
 		{

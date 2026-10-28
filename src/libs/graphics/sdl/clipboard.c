@@ -17,7 +17,12 @@
 #include "libs/log/uqmlog.h"
 #include <SDL.h>
 
-#ifdef _WIN32
+// The Win32 clipboard API is not available to UWP apps.
+#if defined(_WIN32) && !defined(UQM_UWP)
+#	define USE_WIN32_CLIPBOARD
+#endif
+
+#ifdef USE_WIN32_CLIPBOARD
 
 #include <windows.h>
 
@@ -90,12 +95,12 @@ CopySurfaceToClipboard_Win32 (SDL_Surface *surface)
 	return 0;
 }
 
-#endif /* _WIN32 */
+#endif /* USE_WIN32_CLIPBOARD */
 
 int
 CopySurfaceToClipboard (SDL_Surface *surface)
 {
-#ifdef _WIN32
+#ifdef USE_WIN32_CLIPBOARD
 	return CopySurfaceToClipboard_Win32 (surface);
 #else
 	log_add (log_Warning, "Clipboard functionality is not implemented on "

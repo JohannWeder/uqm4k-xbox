@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Template for UrQuanMastersUWP.vcxproj.  Do not edit the generated
+  .vcxproj directly; edit this file and run make-vcxproj.ps1, which fills
+  in the source list from build\msvs2019\UrQuanMasters.vcxproj.
+-->
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{03DE8442-6157-4689-A349-4B4ABB25BCEA}</ProjectGuid>
+    <RootNamespace>UrQuanMasters</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <SdlDir>$(MSBuildThisFileDirectory)..\..\dev-lib\uwp-src\SDL2\SDL-release-2.32.10\</SdlDir>
+    <UwpSrcRoot>$(MSBuildThisFileDirectory)..\..\dev-lib\uwp-src\</UwpSrcRoot>
+    <!-- Packaging (content, signing) is done by package.ps1, not MSBuild. -->
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <GenerateAppxPackageOnBuild>false</GenerateAppxPackageOnBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <OutDir>$(MSBuildThisFileDirectory)out\$(Platform)\$(Configuration)\app\</OutDir>
+    <IntDir>$(MSBuildThisFileDirectory)out\$(Platform)\$(Configuration)\app\obj\</IntDir>
+    <TargetName>UrQuanMasters</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <SDLCheck>false</SDLCheck>
+      <WarningLevel>Level2</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>..\..\src;..\..\src\regex;$(SdlDir)include;$(MSBuildThisFileDirectory)include;$(MSBuildThisFileDirectory)deps;$(UwpSrcRoot)zlib\zlib-1.3.1;$(UwpSrcRoot)libpng\libpng-1.6.43;$(UwpSrcRoot)libogg\ogg-1.3.5\include;$(UwpSrcRoot)libvorbis\vorbis-1.3.7\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UQM_UWP;WIN32;_VW=320;_VH=240;GFXMODULE_SDL;THREADLIB_SDL;HAVE_ZIP;HAVE_JOYSTICK;NETPLAY;USE_INTERNAL_MIKMOD;USE_INTERNAL_LUA;USE_PLATFORM_ACCEL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <DisableSpecificWarnings>4996;4090;4244</DisableSpecificWarnings>
+      <!-- UWP projects force UNICODE, which clashes with UQM's UNICODE type. -->
+      <UndefinePreprocessorDefinitions>UNICODE;_UNICODE;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <!-- vccorlib must be linked before the CRT when mixing C++/CX and C. -->
+      <AdditionalDependencies>vccorlib.lib;msvcrt.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <!-- decoder.h pulls in vorbisfile.lib via #pragma; it lives in uqm-deps.lib. -->
+      <IgnoreSpecificDefaultLibraries>vccorlib.lib;msvcrt.lib;vorbisfile.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup Label="Game sources (generated)">
+@CLCOMPILE_ITEMS@
+  </ItemGroup>
+  <ItemGroup Label="Game headers (generated)">
+@CLINCLUDE_ITEMS@
+  </ItemGroup>
+  <ItemGroup Label="UWP-specific sources">
+    <ClCompile Include="src\msgbox_uwp.c" />
+    <ClCompile Include="$(SdlDir)src\main\winrt\SDL_winrt_main_NonXAML.cpp">
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <ResourceCompile Include="$(SdlDir)src\main\winrt\SDL2-WinRTResources.rc" />
+  </ItemGroup>
+  <ItemGroup Label="Package">
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Image Include="Assets\Square44x44Logo.png" />
+    <Image Include="Assets\Square150x150Logo.png" />
+    <Image Include="Assets\Wide310x150Logo.png" />
+    <Image Include="Assets\StoreLogo.png" />
+    <Image Include="Assets\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="deps\uqm-deps.vcxproj">
+      <Project>{14014215-1484-4F0B-9172-905657ACA188}</Project>
+      <!-- Plain static C library: link it, but it has no .winmd to consume. -->
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <ProjectReference Include="$(SdlDir)VisualC-WinRT\SDL-UWP.vcxproj">
+      <Project>{89E9B32E-A86A-47C3-A948-D2B1622925CE}</Project>
+      <!-- SDL's project targets an older toolset/revision; build it with ours. -->
+      <AdditionalProperties>PlatformToolset=v143;ApplicationTypeRevision=10.0;WindowsTargetPlatformVersion=10.0.26100.0;OutDir=$(MSBuildThisFileDirectory)out\$(Platform)\$(Configuration)\sdl\;IntDir=$(MSBuildThisFileDirectory)out\$(Platform)\$(Configuration)\sdl\obj\</AdditionalProperties>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

@@ -67,7 +67,7 @@ BOOLEAN restartGame;
 			// Including this is actually necessary on OSX.
 #endif
 
-#if defined(ANDROID) || defined(__ANDROID__)
+#if defined(ANDROID) || defined(__ANDROID__) || defined(UQM_UWP)
 #	include "SDL_main.h"
 #endif
 
@@ -317,6 +317,9 @@ static int InvalidArgument (const char *supplied, const char *opt_name);
 static const char *choiceOptString (const struct int_option *option);
 static const char *boolOptString (const struct bool_option *option);
 static const char *boolNotOptString (const struct bool_option *option);
+#ifdef UQM_UWP
+static void setUwpDefaultDirs (struct options_struct *options);
+#endif
 
 #ifdef ANDROID
 int SDL_main(int argc, char** argv)
@@ -340,7 +343,12 @@ int main(int argc, char** argv)
 		INIT_CONFIG_OPTION(  scanlines,         false ),
 		INIT_CONFIG_OPTION(  scaler,            0 ),
 		INIT_CONFIG_OPTION(  showFps,           false ),
+#ifdef UQM_UWP
+		// Stretch to fill a 16:9 TV/monitor (Xbox)
+		INIT_CONFIG_OPTION(  keepAspectRatio,   0 ),
+#else
 		INIT_CONFIG_OPTION(  keepAspectRatio,   1 ),
+#endif
 		INIT_CONFIG_OPTION(  gamma,             1.0f ),
 		INIT_CONFIG_OPTION(  soundDriver,       audio_DRIVER_MIXSDL ),
 		INIT_CONFIG_OPTION(  soundQuality,      audio_QUALITY_HIGH ),
@@ -361,8 +369,14 @@ int main(int argc, char** argv)
 		INIT_CONFIG_OPTION(  speechVolumeScale, 1.0f ),
 		INIT_CONFIG_OPTION(  safeMode,          false ),
 		// Begin MegaMod defaults
+#ifdef UQM_UWP
+		// HD (falls back to SD if the HD pack is missing), largest scale
+		INIT_CONFIG_OPTION(  resolutionFactor,  2 ),
+		INIT_CONFIG_OPTION(  loresBlowupScale,  5),
+#else
 		INIT_CONFIG_OPTION(  resolutionFactor,  0 ),
 		INIT_CONFIG_OPTION(  loresBlowupScale,  1),
+#endif
 		INIT_CONFIG_OPTION(  cheatMode,         false ),
 		INIT_CONFIG_OPTION(  optGodModes,       0 ),
 		INIT_CONFIG_OPTION(  timeDilationScale, 0 ),
@@ -453,6 +467,12 @@ int main(int argc, char** argv)
 	//   log to a file, and we'll only get the log file name after parsing
 	//   the options.
 	optionsResult = parseOptions (argc, argv, &options);
+#ifdef UQM_UWP
+	setUwpDefaultDirs (&options);
+	// Mark the system Back request (the B button on Xbox) as handled, so
+	// the system doesn't suspend the app; the game reads B as Cancel.
+	SDL_SetHint (SDL_HINT_WINRT_HANDLE_BACK_BUTTON, "1");
+#endif
 
 	log_init (15);
 
@@ -853,9 +873,45 @@ int main(int argc, char** argv)
 	}
 
 	HFree (options.addons);
-	
+
 	return EXIT_SUCCESS;
 }
+
+#ifdef UQM_UWP
+// UWP apps are sandboxed: the install folder is read-only and %APPDATA%
+// is not accessible. Unless overridden on the command line, keep the
+// config, saves and log in the app's LocalState folder, and read the
+// content from the install folder. There is no console, so always log
+// to a file.
+static void
+setUwpDefaultDirs (struct options_struct *options)
+{
+	static char contentPath[PATH_MAX];
+	static char logPath[PATH_MAX];
+	const char *installDir =
+			SDL_WinRTGetFSPathUTF8 (SDL_WINRT_PATH_INSTALLED_LOCATION);
+	const char *localDir =
+			SDL_WinRTGetFSPathUTF8 (SDL_WINRT_PATH_LOCAL_FOLDER);
+
+	if (options->contentDir == NULL && installDir != NULL)
+	{
+		snprintf (contentPath, sizeof contentPath, "%s/content", installDir);
+		options->contentDir = contentPath;
+	}
+
+	if (localDir == NULL)
+		return;
+
+	if (options->configDir == NULL)
+		options->configDir = localDir;
+
+	if (options->logFile == NULL)
+	{
+		snprintf (logPath, sizeof logPath, "%s/uqm.log", localDir);
+		options->logFile = logPath;
+	}
+}
+#endif
 
 static void
 saveErrorV (const char *fmt, va_list list)
