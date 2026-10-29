@@ -1,0 +1,2303 @@
+#(TITLE)
+The Ur-Quan Masters MegaMod Setup
+
+#(SUBTITLES)
+
+Graphics Options
+Sound Options
+PC/3DO Options
+Cheat Options
+Control Options
+Advanced Options
+Edit Flight Controls
+Music Options
+Visual Options
+Quality of Life Options
+Device Options
+Upgrade Options
+ 
+Edit Axis Deadzones
+Accessibility Options
+
+#(CHOICES)
+Graphics
+Renderer
+Scaler
+Scanlines
+Menu Style
+Font Style
+Stats Display
+Scroll Style
+Subtitles
+3DO Remixes
+Display Mode
+Cutscenes
+Show FPS
+Melee Zoom
+Positional Audio
+Sound Driver
+Sound Quality
+Slave Shields
+1st Player
+2nd Player
+Control Set
+Precursor's Remixes
+Speech
+Aspect Ratio
+Kohr-Stahp
+God Modes
+Time Dilation
+Bubble Warp
+Unlock Ships
+Head Start
+Auto-Detect Icons
+Infinite R.U.
+Skip Intro
+Fuel Range Indicators
+Menu Music
+Show Nebulae
+Orbiting Planets
+Textured Planets
+Date Format
+Infinite Fuel
+Partial Pickup
+In-Game Help Menus
+Windowed Resolution
+Infinite Credits
+Hazard Colors
+Custom Border
+Interplanetary Alien Ambience
+Volasaurus' Remixes
+Show Whole Fuel Value
+Relative Joystick P1
+Melee Zoom
+Lander Hold Size
+Screen Transitions
+Difficulty
+Extended Lore
+Nomad Mode
+Game Over Cutscenes
+NPC Ship Orientation
+Alternate Orz Font
+Button Icons
+Smart Auto-Pilot
+Sphere Scan Overlay
+Planet Style
+Star Background
+Scanning Style
+Non-Stop Oscilloscope
+Oscilloscope Style
+HD Animations
+Lander View Style
+Planet Map Textures
+Flagship Engine Color
+No HyperSpace Encounters
+Kohr-Ah DeCleansing
+No Melee Obstacles
+Show Visited Stars
+Unscaled View (HD)
+Sphere Style
+Slaughter Mode
+Advanced Auto-Pilot
+Super-Melee Ship Descriptions
+Music Resume
+Platform UI
+Starmap Seeding
+Sphere Colors
+Scatter Elements
+Show Lander Upgrades
+Fleet Point System
+Portal Spawner
+Talking Pet
+Utwig Bomb
+Sun Device
+Rosy Sphere
+Aqua Helix
+Clear Spindle
+Ultron (Broken)
+Ultron (Semi-Broken)
+Ultron (Semi-Fixed)
+Ultron (Fixed)
+Shofixti Maidens
+Umgah Hyperwave Broadcaster
+Burvixese Hyperwave 'Caster
+Taalo Protector
+Egg Casing 1
+Egg Casing 2
+Egg Casing 3
+Syreen Shuttle
+VUX Beast
+Slylandro Self-Destruct Code
+Ur-Quan Warp Pod
+Wimbli's Trident
+Glowing Rod
+Lunar Base
+Lander Speed
+Lander Cargo
+Lander Rapid Fire
+Lander Bio Shield
+Lander Quake Shield
+Lander Lightning Shield
+Lander Heat Shield
+Point Defense Module
+Fusion Blaster Module
+Hi-Eff Fuel Module
+Tracking Module
+Hellbore Cannon Module
+Shiva Furnace Module
+Ship Seeding
+Ship Storage Queue
+Shipyard Captain Names
+DOS Side Menu
+HyperSpace Color
+Relative Joystick P2
+Crappy Mouse Input
+Battle Mouse Input
+ScreenShots
+High Visibility Orbits
+High Visibility Planets
+Lander Stick Control
+
+#(CAT_0_OPTS)
+Original
+HD
+
+#(CAT_0_OPT_0_DESC)
+Lo-res 320x240 resolution.
+Available with SDL framebuffer or OpenGL.
+&!UQM will reload when changed.
+
+#(CAT_0_OPT_1_DESC)
+Hi-res 1280x960 resolution.
+Requires `Hires' package installed.
+&!UQM will reload when changed.
+
+#(CAT_1_OPTS)
+SDL Framebuffer
+OpenGL
+
+#(CAT_1_OPT_0_DESC)
+Uses SDL Framebuffer mode if possible,
+and OpenGL otherwise.  Framebuffer mode
+is available for 320x240 and 640x480.
+
+#(CAT_1_OPT_1_DESC)
+Always use OpenGL.
+OpenGL can produce any resolution and is
+usually hardware-accelerated.
+
+#(CAT_2_OPTS)
+None
+Bilinear
+Biadapt
+Biadv
+Triscan
+HQ
+
+#(CAT_2_OPT_0_DESC)
+No scaling.
+Simulates the original 320x240 display.
+Fastest, though least attractive, option.
+
+#(CAT_2_OPT_1_DESC)
+Bilinear average scaling.
+A simple, fast blending technique.
+Hardware-accelerated in OpenGL mode.
+
+#(CAT_2_OPT_2_DESC)
+Adaptive bilinear scaling.
+A slower, less blurry blending technique.
+
+#(CAT_2_OPT_3_DESC)
+Advanced bilinear scaling.
+Hand-weighted blend that produces smoother curves.
+The most expensive scaler.
+
+#(CAT_2_OPT_4_DESC)
+An interpolating scaler.
+Produces sharp edges, but at a higher resolution.
+Based on the Scale2x algorithm.
+
+#(CAT_2_OPT_5_DESC)
+A high quality, very expensive interpolating scaler.
+Produces sharp edges, but at a higher resolution.
+Based on the HQ2X algorithm.
+
+#(CAT_3_OPTS)
+Disabled
+Enabled
+
+#(CAT_3_OPT_0_DESC)
+Do not attempt to simulate an interlaced display.
+
+#(CAT_3_OPT_1_DESC)
+Simulate an interlaced display.
+
+#(CAT_4_OPTS)
+Text
+Pictographic
+
+#(CAT_4_OPT_0_DESC)
+In-game menus resemble the Original PC version.
+
+#(CAT_4_OPT_1_DESC)
+In-game menus resemble the 3DO version.
+
+#(CAT_5_OPTS)
+Gradients
+Flat
+
+#(CAT_5_OPT_0_DESC)
+Certain menu texts and dialogs use gradients,
+as per the original PC version.
+Looks nicer.
+
+#(CAT_5_OPT_1_DESC)
+All text and menus use a `flat' colour scheme as well as
+the larger 3DO font, as per the 3DO version.
+Easier to read.
+
+#(CAT_6_OPTS)
+Text
+Pictograms
+P6014 Text
+P6014 Pictograms
+
+#(CAT_6_OPT_0_DESC)
+Displays planet scan information as text,
+as per the original PC version.
+
+#(CAT_6_OPT_1_DESC)
+Displays planet scan information as pictograms,
+as per the 3DO version.
+
+#(CAT_6_OPT_2_DESC)
+Displays planet scan information as text,
+as per the PC version, but uses colours from Project 6014.
+Easier to read.
+
+#(CAT_6_OPT_3_DESC)
+Displays planet scan information as pictograms,
+as per the 3DO version, but uses colours from Project 6014.
+Easier to read.
+
+#(CAT_7_OPTS)
+Per-Page
+Smooth
+
+#(CAT_7_OPT_0_DESC)
+When fast-forwarding or rewinding conversations
+in-game, advance one screen of subtitles at a time.
+This mimics the original PC version.
+
+#(CAT_7_OPT_1_DESC)
+When fast-forwarding or rewinding conversations
+in-game, advance at a linear rate.
+This mimics the 3DO version.
+
+#(CAT_8_OPTS)
+Disabled
+Enabled
+
+#(CAT_8_OPT_0_DESC)
+Do not subtitle alien speech.
+
+#(CAT_8_OPT_1_DESC)
+Show subtitles for alien speech.
+
+#(CAT_9_OPTS)
+Disabled
+Enabled
+
+#(CAT_9_OPT_0_DESC)
+Uses the music from the Original PC version.
+Can still be overriden by addon packs.
+&!UQM will reload when changed.
+
+#(CAT_9_OPT_1_DESC)
+Overrides PC soundtrack with 3DO music.
+Can be further overridden by addon packs.
+&!UQM will reload when changed.
+
+#(CAT_10_OPTS)
+Windowed
+Exclusive Fullscreen
+Borderless Fullscreen
+
+#(CAT_10_OPT_0_DESC)
+Display everything in a window.
+(if windowing is available)
+
+#(CAT_10_OPT_1_DESC)
+Game occupies the entire screen.
+Changes display resolution to fit game resolution
+
+#(CAT_10_OPT_2_DESC)
+Game occupies the entire screen.
+Changes game resolution to fit display resolution
+
+#(CAT_11_OPTS)
+Slides
+Movie
+
+#(CAT_11_OPT_0_DESC)
+Prefer slides to movies if both are present.
+Forces the PC intro.
+
+#(CAT_11_OPT_1_DESC)
+Prefer movies to slides.
+Will use 3DO content if present.
+
+#(CAT_12_OPTS)
+No
+Yes
+
+#(CAT_12_OPT_0_DESC)
+Do not show FPS in the console window.
+
+#(CAT_12_OPT_1_DESC)
+Show FPS in the console window.
+
+#(CAT_13_OPTS)
+Stepped
+Smooth
+
+#(CAT_13_OPT_0_DESC)
+Cut between three zoom levels in combat.
+Resembles PC combat.
+
+#(CAT_13_OPT_1_DESC)
+Continuously scale the combat view.
+Resembles 3DO combat.
+
+#(CAT_14_OPTS)
+Disabled
+Enabled
+
+#(CAT_14_OPT_0_DESC)
+Sound effects are center-channel.
+&!UQM will reload when changed.
+
+#(CAT_14_OPT_1_DESC)
+Uses positional SFX if possible.
+Currently only supported on OpenAL.
+&!UQM will reload when changed.
+
+#(CAT_15_OPTS)
+None
+MixSDL
+OpenAL
+
+#(CAT_15_OPT_0_DESC)
+Play silently.
+&!UQM will reload when changed.
+
+#(CAT_15_OPT_1_DESC)
+Use the default audio mixer.
+&!UQM will reload when changed.
+
+#(CAT_15_OPT_2_DESC)
+Use the Creative Labs OpenAL driver.
+&!UQM will reload when changed.
+
+#(CAT_16_OPTS)
+Low
+Medium
+High
+
+#(CAT_16_OPT_0_DESC)
+Low audio quality.
+&!UQM will reload when changed.
+
+#(CAT_16_OPT_1_DESC)
+Medium audio quality.
+&!UQM will reload when changed.
+
+#(CAT_16_OPT_2_DESC)
+Highest audio quality.
+&!UQM will reload when changed.
+
+#(CAT_17_OPTS)
+Static
+Pulsating
+
+#(CAT_17_OPT_0_DESC)
+Slave shields maintain a static glow.
+This mimics the PC version.
+&!Only affects the UQM Sphere Style
+
+#(CAT_17_OPT_1_DESC)
+Slave shields pulsate.
+This mimics the 3DO verion.
+&!Only affects the UQM Sphere Style
+
+#(CAT_18_OPTS)
+Placeholder
+Placeholder
+
+#(CAT_18_OPT_0_DESC)
+Controls the 1st Player in Super
+Melee, and the entire Full Game.
+
+#(CAT_18_OPT_1_DESC)
+Controls the 1st Player in Super
+Melee, and the entire Full Game.
+
+#(CAT_19_OPTS)
+Manual
+Auto-Detect
+
+#(CAT_19_OPT_0_DESC)
+Set button icons manually
+
+#(CAT_19_OPT_1_DESC)
+Set button icons automatically
+
+#(CAT_20_OPTS)
+1st Player (Bottom)
+2nd Player (Top)
+
+#(CAT_20_OPT_0_DESC)
+
+
+Select the control template to edit.
+
+#(CAT_20_OPT_1_DESC)
+
+
+Select the control template to edit.
+
+#(CAT_21_OPTS)
+Disabled
+Enabled
+
+#(CAT_21_OPT_0_DESC)
+Do not load the Precursors Remix Pack.
+
+&!UQM will reload when changed.
+
+#(CAT_21_OPT_1_DESC)
+Overrides PC or 3DO soundtrack with the
+modern soundtrack written by The Precursors.
+&!UQM will reload when changed.
+
+#(CAT_22_OPTS)
+Disabled
+Enabled
+
+#(CAT_22_OPT_0_DESC)
+Do not load the 3DO Speech Pack.
+Uses script closer to PC version.
+
+#(CAT_22_OPT_1_DESC)
+Use 3DO speech. The script is closer to 3DO
+version where there are differences.
+
+#(CAT_23_OPTS)
+Fill Window
+Native
+Force 4:3
+
+#(CAT_23_OPT_0_DESC)
+Allow any aspect ratio. The game will be stretched to fill the
+window no matter the resolution.
+
+#(CAT_23_OPT_1_DESC)
+Display the game with its native aspect ratio
+
+#(CAT_23_OPT_2_DESC)
+Force the aspect ratio to be 4:3 regardless of the native resolution
+
+#(CAT_24_OPTS)
+Disabled
+Enabled
+
+#(CAT_24_OPT_0_DESC)
+Stops the Kohr-Ah in their tracks, literally.
+When enabled the Kohr-Ah SOI does not move.
+Even when the time limit is reached.
+
+#(CAT_24_OPT_1_DESC)
+Stops the Kohr-Ah in their tracks, literally.
+When enabled the Kohr-Ah SOI does not move.
+Even when the time limit is reached.
+
+#(CAT_25_OPTS)
+Disabled
+Infinite Energy
+Infinite Health
+Full God Mode
+
+#(CAT_25_OPT_0_DESC)
+No version of god mode is applied and you can come to harm
+
+#(CAT_25_OPT_1_DESC)
+The player-piloted ship in Melee refills its energy when the
+Weapon and/or Special buttons are pressed.
+&!(Only functional against AI opponents and during the Story)
+
+#(CAT_25_OPT_2_DESC)
+The player-piloted ship and lander can not come to any harm.
+
+&!(Only functional against AI opponents and during the Story)
+
+#(CAT_25_OPT_2_DESC)
+Combination of Infinite Health and Infinite Energy giving you
+full God Mode in and out of Melee.
+&!(Only functional against AI opponents and during the Story)
+
+#(CAT_26_OPTS)
+Normal
+Slow
+Fast
+
+#(CAT_26_OPT_0_DESC)
+Time flows normally.
+
+#(CAT_26_OPT_1_DESC)
+Time moves 6 times slower.
+Hyperspace = 30 seconds
+Interplanetary =  3 minutes
+
+#(CAT_26_OPT_2_DESC)
+Time moves 5 times faster.
+Hyperspace = 1 second
+Interplanetary =  6 seconds
+
+#(CAT_27_OPTS)
+Disabled
+Enabled
+
+#(CAT_27_OPT_0_DESC)
+Instantaneously warp to any spot on the Starmap.
+Fuel will still be consumed as usual.
+
+#(CAT_27_OPT_1_DESC)
+Instantaneously warp to any spot on the Starmap.
+Fuel will still be consumed as usual.
+
+#(CAT_28_OPTS)
+Disabled
+Enabled
+
+#(CAT_28_OPT_0_DESC)
+Unlock ships all ships not normally available to you in the story.
+
+#(CAT_28_OPT_1_DESC)
+Unlock ships all ships not normally available to you in the story.
+
+#(CAT_29_OPTS)
+Disabled
+Enabled
+
+#(CAT_29_OPT_0_DESC)
+Start with Fwiffo in your fleet, a single radioactive
+in your Storage Bay, and the Moon Base already explored.
+Allowing the StarBase to be unlocked quicker than usual.
+
+#(CAT_29_OPT_1_DESC)
+Start with Fwiffo in your fleet, a single radioactive
+in your Storage Bay, and the Moon Base already explored.
+Allowing the StarBase to be unlocked quicker than usual.
+
+#(CAT_30_OPTS)
+Disabled
+Enabled
+
+#(CAT_30_OPT_0_DESC)
+Manually select button icons to display.
+
+#(CAT_30_OPT_1_DESC)
+Automatically detect button icons to display.
+
+&!This option persists through saves.
+
+#(CAT_31_OPTS)
+Disabled
+Enabled
+
+#(CAT_31_OPT_0_DESC)
+Gives you virtually infinite R.U. in the story mode.
+
+Does not persist through game saves.
+
+#(CAT_31_OPT_1_DESC)
+Gives you virtually infinite R.U. in the story mode.
+
+Does not persist through game saves.
+
+#(CAT_32_OPTS)
+Disabled
+Enabled
+
+#(CAT_32_OPT_0_DESC)
+Skips the logo, splash screen, and intro cutscene.
+
+#(CAT_32_OPT_1_DESC)
+Skips the logo, splash screen, and intro cutscene.
+
+#(CAT_33_OPTS)
+No Extra Indicators
+Fuel Range at Destination
+Fuel Range to Sol
+All Range Indicators Enabled
+
+#(CAT_33_OPT_0_DESC)
+Just the single basic fuel range indicator.
+
+#(CAT_33_OPT_1_DESC)
+Shows an extra fuel circle that depicts the remaining amount
+of fuel you'll have at your destination
+(Indicated by a dotted light gray circle)
+
+#(CAT_33_OPT_2_DESC)
+Shows an extra fuel ellipse that depicts the point of
+no return for traveling back to Sol.
+(Indicated by a filled in, lighter grey ellipse)
+
+#(CAT_33_OPT_3_DESC)
+Shows both the fuel range at the intended destination
+and the point of no return ellipse for Sol
+
+#(CAT_34_OPTS)
+Disabled
+Enabled
+
+#(CAT_34_OPT_0_DESC)
+Plays music in the Main Menu, Setup Menu, and the
+Super Melee menu.
+
+#(CAT_34_OPT_1_DESC)
+Plays music in the Main Menu, Setup Menu, and the
+Super Melee menu.
+
+#(CAT_35_OPTS)
+Disabled
+Enabled
+
+#(CAT_35_OPT_0_DESC)
+When enabled this option shows nebulous clouds
+in the background of star systems.
+
+#(CAT_35_OPT_1_DESC)
+When enabled this option shows nebulous clouds
+in the background of star systems.
+
+#(CAT_36_OPTS)
+Disabled
+Enabled
+
+#(CAT_36_OPT_0_DESC)
+When enabled the planets and moons will move about
+their respective orbits over time.
+
+#(CAT_36_OPT_1_DESC)
+When enabled the planets and moons will move about
+their respective orbits over time.
+
+#(CAT_37_OPTS)
+Disabled
+Enabled
+
+#(CAT_37_OPT_0_DESC)
+When enabled planets will be shown fully textured
+
+#(CAT_37_OPT_1_DESC)
+Display beautiful textured planets in star systems.
+
+#(CAT_38_OPTS)
+Original (MMM DD·YYYY)
+MM·DD·YYYY
+DD MMM·YYYY
+DD·MM·YYYY
+
+#(CAT_38_OPT_0_DESC)
+Shows the date as follows: 
+
+FEB 17·2155
+
+#(CAT_38_OPT_1_DESC)
+Shows the date as follows: 
+
+02·17·2155
+
+#(CAT_38_OPT_2_DESC)
+Shows the date as follows: 
+
+17 FEB·2155
+
+#(CAT_38_OPT_3_DESC)
+Shows the date as follows: 
+
+17·02·2155
+
+#(CAT_39_OPTS)
+Disabled
+Enabled
+
+#(CAT_39_OPT_0_DESC)
+Gives you virtually infinite fuel in the story mode.
+
+#(CAT_39_OPT_1_DESC)
+Gives you virtually infinite fuel in the story mode.
+
+#(CAT_40_OPTS)
+Disabled
+Enabled
+
+#(CAT_40_OPT_0_DESC)
+Minerals that are bigger than the remaining limit of 
+your Lander hold will be partially picked up.
+Biological data will not be picked up if larger than the hold.
+
+#(CAT_40_OPT_1_DESC)
+Minerals that are bigger than the remaining limit of 
+your Lander hold will be partially picked up.
+Biological data will not be picked up if larger than the hold.
+
+#(CAT_41_OPTS)
+Disabled
+Enabled
+
+#(CAT_41_OPT_0_DESC)
+Displays mineral values while scanning/traversing planets
+and displays StarMap keys/buttons while on the StarMap.
+
+#(CAT_41_OPT_1_DESC)
+Displays mineral values while scanning/traversing planets
+and displays StarMap keys/buttons while on the StarMap.
+
+#(CAT_42_OPTS)
+Native
+640 x ...
+960 x ...
+1280 x ...
+1600 x ...
+1920 x ...
+Custom
+
+#(CAT_42_OPT_0_DESC)
+Native resolution for Vanilla and HD graphics.
+320x240 resolution for Vanilla
+1280x960 resolution for HD
+
+#(CAT_42_OPT_1_DESC)
+Scale graphics to 640px horizontal resolution.
+Only applicable to Exclusive Fullscreen
+and the `Fill Window' aspect ratio
+
+#(CAT_42_OPT_2_DESC)
+Scale graphics to 960px horizontal resolution.
+Only applicable to Exclusive Fullscreen
+and the `Fill Window' aspect ratio
+
+#(CAT_42_OPT_3_DESC)
+Scale graphics to 1280px horizontal resolution.
+Only applicable to Exclusive Fullscreen
+and the `Fill Window' aspect ratio
+
+#(CAT_42_OPT_4_DESC)
+Scale graphics to 1600px horizontal resolution.
+Only applicable to Exclusive Fullscreen
+and the `Fill Window' aspect ratio
+
+#(CAT_42_OPT_5_DESC)
+Scale graphics to 1920px horizontal resolution.
+Only applicable to Exclusive Fullscreen
+and the `Fill Window' aspect ratio
+
+#(CAT_42_OPT_6_DESC)
+Using a custom resolution.
+
+#(CAT_43_OPTS)
+Disabled
+Enabled
+
+#(CAT_43_OPT_0_DESC)
+Gives you virtually infinite Melnorme Credits.
+
+#(CAT_43_OPT_1_DESC)
+Gives you virtually infinite Melnorme Credits.
+
+#(CAT_44_OPTS)
+Disabled
+Enabled
+
+#(CAT_44_OPT_0_DESC)
+Colored text for temperature, weather, and tectonic hazards 
+when viewing planetary scans based on severity.
+
+#(CAT_44_OPT_1_DESC)
+Colored text for temperature, weather, and tectonic hazards 
+when viewing planetary scans based on severity.
+
+#(CAT_45_OPTS)
+Disabled
+Enabled
+
+#(CAT_45_OPT_0_DESC)
+An alternative UI inspired by Clay's "SC2 Redo" concept art
+
+#(CAT_45_OPT_1_DESC)
+An alternative UI inspired by Clay's "SC2 Redo" concept art
+
+#(CAT_46_OPTS)
+Disabled
+No Spoilers
+Spoilers
+
+#(CAT_46_OPT_0_DESC)
+Music that plays when you are in a star system
+within an alien race's Sphere of Influence
+
+#(CAT_46_OPT_1_DESC)
+Music that plays when you are in a star system
+within an alien race's Sphere of Influence but
+only after you discover the alien race
+
+#(CAT_46_OPT_2_DESC)
+Music that plays when you are in a star system
+within an alien race's Sphere of Influence regardless
+if you've ever met them or not
+
+#(CAT_47_OPTS)
+Disabled
+Enabled
+
+#(CAT_47_OPT_0_DESC)
+A complete set of remixes made by Volasaurus.
+Overrides the PC, 3DO, or Precursors soundtrack
+&!UQM will reload when changed.
+
+#(CAT_47_OPT_1_DESC)
+A complete set of remixes made by Volasaurus.
+Overrides the PC, 3DO, or Precursors soundtrack
+&!UQM will reload when changed.
+
+#(CAT_48_OPTS)
+Disabled
+Enabled
+
+#(CAT_48_OPT_0_DESC)
+Displays the entire FUEL value as a decimal.
+
+#(CAT_48_OPT_1_DESC)
+Displays the entire FUEL value as a decimal.
+
+#(CAT_49_OPTS)
+Normal Control
+Left Stick Relative
+Right Stick Relative
+Left Stick Auto-Thrust
+Right Stick Auto-Thrust
+
+#(CAT_49_OPT_0_DESC)
+Normal control
+
+#(CAT_49_OPT_1_DESC)
+Ships face the direction of your left analog stick
+
+#(CAT_49_OPT_2_DESC)
+Ships face the direction of your right analog stick
+
+#(CAT_49_OPT_3_DESC)
+Ships face the direction of your left analog stick
+A partial push turns you to face that direction
+A full push thrusts your ship in that direction
+
+#(CAT_49_OPT_4_DESC)
+Ships face the direction of your right analog stick
+A partial push turns you to face that direction
+A full push thrusts your ship in that direction
+
+#(CAT_50_OPTS)
+Stepped
+Nearest
+Bilinear
+Trilinear
+
+#(CAT_50_OPT_0_DESC)
+Cut between three zoom levels in combat.
+
+Resembles PC combat | Android Only
+
+#(CAT_50_OPT_1_DESC)
+Continuously scale the combat view using Nearest scaler.
+
+Resembles 3DO combat | Android Only
+
+#(CAT_50_OPT_2_DESC)
+Continuously scale the combat view using Bilinear scaler.
+
+Resembles 3DO combat | Android Only
+
+#(CAT_50_OPT_3_DESC)
+Continuously scale the combat view using Trilinear scaler.
+
+Resembles 3DO combat | Android Only
+
+#(CAT_51_OPTS)
+PC Cargo Size
+3DO Cargo Size
+
+#(CAT_51_OPT_0_DESC)
+Max amount of minerals the Lander can pick up
+as per the PC version: 64 units before upgrade
+
+#(CAT_51_OPT_1_DESC)
+Max amount of minerals the Lander can pick up
+as per the 3DO version: 50 units before upgrade
+
+#(CAT_52_OPTS)
+DOS
+3DO
+
+#(CAT_52_OPT_0_DESC)
+Screen transitions will be instantaneous.
+Fades will use a Subtractive/Additive blend.
+&!Fade style is always Alpha blend in SDL1 builds
+
+#(CAT_52_OPT_1_DESC)
+Screen transitions will crossfade.
+Fades will use an Alpha blend.
+&!Fade style is always Alpha blend in SDL1 builds
+
+#(CAT_53_OPTS)
+Original
+Easy
+Hard
+Choose At Start
+
+#(CAT_53_OPT_0_DESC)
+Vanilla difficulty as it was originally intended.
+
+#(CAT_53_OPT_1_DESC)
+Various changes to make UQM gameplay easier.
+
+#(CAT_53_OPT_2_DESC)
+&!FOR VETERANS ONLY! NOT FOR BEGINNERS!
+A multitude of changes to make gameplay much
+harder for the veteran UQM player.
+
+#(CAT_53_OPT_3_DESC)
+Choose the difficulty you want when you start
+a new game from the Main Menu.
+
+#(CAT_54_OPTS)
+Disabled
+Enabled
+
+#(CAT_54_OPT_0_DESC)
+Extended Lore that expands upon the game's events.
+Based upon Extended Mod made by 0xDEC0DE.
+&!See the readme for a full list of additions.
+
+#(CAT_54_OPT_1_DESC)
+Extended Lore that expands upon the game's events.
+Based upon Extended Mod made by 0xDEC0DE.
+&!See the readme for a full list of additions.
+
+#(CAT_55_OPTS)
+Disabled
+Easy
+Normal
+
+#(CAT_55_OPT_0_DESC)
+&!FOR VETERANS ONLY! NOT FOR BEGINNERS!
+A forced `No Starbase' mode for expert players 
+who want the most extreme of challenges.
+
+#(CAT_55_OPT_1_DESC)
+&!FOR VETERANS ONLY! NOT FOR BEGINNERS!
+A forced `No Starbase' mode for expert players 
+with a few conveniences to help out.
+
+#(CAT_55_OPT_2_DESC)
+&!FOR VETERANS ONLY! NOT FOR BEGINNERS!
+Basic and brutal `No Starbase' mode for expert players 
+with no extra conveniences to help out.
+
+#(CAT_56_OPTS)
+Disabled
+Enabled
+
+#(CAT_56_OPT_0_DESC)
+A set of cinematic slides for various game over sequences.
+
+#(CAT_56_OPT_1_DESC)
+A set of cinematic slides for various game over sequences.
+
+#(CAT_57_OPTS)
+Disabled
+Enabled
+
+#(CAT_57_OPT_0_DESC)
+NPC ship icons will face the direction they're
+traveling while in Interplanetary view.
+Also the mysterious Probes you may encounter will `tumble'
+
+#(CAT_57_OPT_1_DESC)
+NPC ship icons will face the direction they're
+traveling while in Interplanetary view.
+Also the mysterious Probes you may encounter will `tumble'
+
+#(CAT_58_OPTS)
+Disabled
+Enabled
+
+#(CAT_58_OPT_0_DESC)
+Enables an alternative font for the 
+*untranslatable* portion of The Orz speech
+
+#(CAT_58_OPT_1_DESC)
+Enables an alternative font for the 
+*untranslatable* portion of The Orz speech
+
+#(CAT_59_OPTS)
+Keyboard
+Xbox
+PlayStation
+Switch Pro
+
+#(CAT_59_OPT_0_DESC)
+Show Keyboard controls in the menu and UI.
+
+#(CAT_59_OPT_1_DESC)
+Show Xbox controls in the menu and UI.
+
+#(CAT_59_OPT_2_DESC)
+Show PlayStation DualSense controls in the menu and UI.
+
+#(CAT_59_OPT_3_DESC)
+Show Switch Pro controls in the menu and UI.
+
+#(CAT_60_OPTS)
+Disabled
+Enabled
+
+#(CAT_60_OPT_0_DESC)
+Smart Auto-Pilot will find the quickest way out of the current star
+system and will already be facing the direction of the set
+coordinates when it enters HyperSpace.
+
+#(CAT_60_OPT_1_DESC)
+Smart Auto-Pilot will find the quickest way out of the current star
+system and will already be facing the direction of the set
+coordinates when it enters HyperSpace.
+
+#(CAT_61_OPTS)
+Shaded
+Plain
+
+#(CAT_61_OPT_0_DESC)
+Planets will be shaded with the color of the
+current scan, as per the original PC version.
+
+#(CAT_61_OPT_1_DESC)
+Planets will not be shaded with the color of the
+current scan, as per the 3DO version.
+
+#(CAT_62_OPTS)
+PC
+3DO
+
+#(CAT_62_OPT_0_DESC)
+Planets in interplanetary will resemble the 
+DOS planet coloring and shading
+&!(Only applicable if Textured Planets is disabled)
+
+#(CAT_62_OPT_1_DESC)
+Planets in interplanetary will resemble the 
+3DO planet coloring and shading
+&!(Only applicable if Textured Planets is disabled)
+
+#(CAT_63_OPTS)
+PC
+3DO
+UQM
+HD-mod
+
+#(CAT_63_OPT_0_DESC)
+Generated star background in interplanetary
+will resemble the DOS style arrangement
+
+#(CAT_63_OPT_1_DESC)
+Generated star background in interplanetary
+will resemble the 3DO style arrangement
+
+#(CAT_63_OPT_2_DESC)
+Generated star background in interplanetary
+will resemble the default UQM style arrangement
+
+#(CAT_63_OPT_3_DESC)
+Generated star background in interplanetary
+will resemble the default HD-mod style arrangement
+
+#(CAT_64_OPTS)
+PC
+3DO
+
+#(CAT_64_OPT_0_DESC)
+Scan is static and objects pop-up in random order
+resembling the PC version.
+
+#(CAT_64_OPT_1_DESC)
+Scan sweeps down the map revealing objects in order
+resembling the 3DO version.
+
+#(CAT_65_OPTS)
+Disabled
+Enabled
+
+#(CAT_65_OPT_0_DESC)
+Oscilloscope display shows either the current alien speech or music
+Depending on if Speech is enabled or not.
+
+#(CAT_65_OPT_1_DESC)
+Oscilloscope display switches over to music when alien stops talking.
+When Speech is enabled.
+
+#(CAT_66_OPTS)
+PC
+3DO
+
+#(CAT_66_OPT_0_DESC)
+Oscilloscope display resembles the PC version
+
+#(CAT_66_OPT_1_DESC)
+Oscilloscope display resembles the 3DO version
+
+#(CAT_67_OPTS)
+Static
+Animated
+
+#(CAT_67_OPT_0_DESC)
+HD HyperSpace stars, gravity wells, QuasiSpace portals
+and Solar System Suns faithfully resemble their Vanilla counterparts
+but are not animated.
+
+#(CAT_67_OPT_1_DESC)
+HD HyperSpace stars, gravity wells, QuasiSpace portals
+and Solar System Suns are animated.
+
+#(CAT_68_OPTS)
+PC
+3DO
+
+#(CAT_68_OPT_0_DESC)
+Lander view will show at the bottom-right portion of the screen
+with lander details to the left of the planet map.
+Mimicking the PC version.
+
+#(CAT_68_OPT_1_DESC)
+Lander view will show in the area above the planet map
+with lander details at the bottom-right of the screen.
+Mimicking the 3DO version.
+
+#(CAT_69_OPTS)
+3DO
+UQM
+
+#(CAT_69_OPT_0_DESC)
+Planet textures, mineral, and energy placements on the scan screen
+will resemble the 3DO version.
+&!This option is superceded by Custom Seed
+
+#(CAT_69_OPT_1_DESC)
+Planet textures, mineral, and energy placements on the scan screen
+will resemble the UQM version.
+&!This option is superceded by Custom Seed
+
+#(CAT_70_OPTS)
+Green Engine
+Red Engine
+
+#(CAT_70_OPT_0_DESC)
+The Flagship's engine will be green as per the PC version.
+
+#(CAT_70_OPT_1_DESC)
+The Flagship's engine will be red as per the 3DO version.
+
+#(CAT_71_OPTS)
+Disabled
+Enabled
+
+#(CAT_71_OPT_0_DESC)
+You will not encounter any alien races in HyperSpace.
+
+#(CAT_71_OPT_1_DESC)
+You will not encounter any alien races in HyperSpace.
+
+#(CAT_72_OPTS)
+Disabled
+Enabled
+
+#(CAT_72_OPT_0_DESC)
+Kohr-Ah Death March starts 100 years from 2155.
+Does not work after the Death March has started.
+Use Kohr-Stahp instead for the scenario.
+
+#(CAT_72_OPT_1_DESC)
+Kohr-Ah Death March starts 100 years from 2155.
+Does not work after the Death March has started.
+Use Kohr-Stahp instead for the scenario.
+
+#(CAT_73_OPTS)
+Disabled
+Enabled
+
+#(CAT_73_OPT_0_DESC)
+No planets or asteroids in Super Melee.
+
+&!Local play only.
+
+#(CAT_73_OPT_1_DESC)
+No planets or asteroids in Super Melee.
+
+&!Local play only.
+
+#(CAT_74_OPTS)
+Disabled
+Enabled
+
+#(CAT_74_OPT_0_DESC)
+Visited stars will be dimmed on the StarMap
+and their names will be inside parenthesis
+when you hover over them with the StarMap cursor.
+
+#(CAT_74_OPT_1_DESC)
+Visited stars will be dimmed on the StarMap
+and their names will be inside parenthesis
+when you hover over them with the StarMap cursor.
+
+#(CAT_75_OPTS)
+Disabled
+Enabled
+
+#(CAT_75_OPT_0_DESC)
+Star System view will have orbit dots and stars
+to proper 4x scale of the original.
+Mimicking the original look, but in HD.
+
+#(CAT_75_OPT_1_DESC)
+Star System view will have unscaled orbit dots
+and stars, mimicking the look of Team 6014's
+HD-mod Beta released in 2012.
+
+#(CAT_76_OPTS)
+PC
+3DO
+UQM
+
+#(CAT_76_OPT_0_DESC)
+Scan Sphere resembles the DOS style
+
+#(CAT_76_OPT_1_DESC)
+Scan Sphere resembles the 3DO style
+
+#(CAT_76_OPT_2_DESC)
+Scan Sphere resembles the UQM style
+
+#(CAT_77_OPTS)
+Disabled
+Enabled
+
+#(CAT_77_OPT_0_DESC)
+Enables the ability to affect select alien race's Sphere of Influence
+by destroying their ships in battle.
+&!WARNING: Affected SOI persists in saved games even when disabled
+
+#(CAT_77_OPT_1_DESC)
+Enables the ability to affect select alien race's Sphere of Influence
+by destroying their ships in battle.
+&!WARNING: Affected SOI persists in saved games even when disabled
+
+#(CAT_78_OPTS)
+Disabled
+Enabled
+
+#(CAT_78_OPT_0_DESC)
+Advanced Auto-Pilot finds the cheapest route through HyperSpace or 
+QuasiSpace and pilots the ship for you on that route.
+
+#(CAT_78_OPT_1_DESC)
+Advanced Auto-Pilot finds the cheapest route through HyperSpace or 
+QuasiSpace and pilots the ship for you on that route.
+
+#(CAT_79_OPTS)
+Disabled
+Enabled
+
+#(CAT_79_OPT_0_DESC)
+Show Star Control 1-styled short ship descriptions at the bottom of
+the main Super-Melee menu while picking a ship for your fleet.
+
+#(CAT_79_OPT_1_DESC)
+Show Star Control 1-styled short ship descriptions at the bottom of
+the main Super-Melee menu while picking a ship for your fleet.
+
+#(CAT_80_OPTS)
+Disabled
+5 Minutes
+Indefinite
+
+#(CAT_80_OPT_0_DESC)
+Music Resume is disabled
+
+#(CAT_80_OPT_1_DESC)
+Resumes the music in UQM from where it last left off.
+But with a 5 minute timer that resets individual tracks back to their
+beginning if not heard within the alotted time.
+
+#(CAT_80_OPT_1_DESC)
+Resumes the music in UQM from where it last left off.
+But with no timer that resets music back to beginning after 
+a period of time.
+
+#(CAT_81_OPTS)
+DOS
+3DO
+UQM
+
+#(CAT_81_OPT_0_DESC)
+Changes the UI scaling to present a faithful DOS look and feel.
+Fits in a 16:10 aspect ratio.
+&!Disables many features that are incompatible while enabled
+
+#(CAT_81_OPT_1_DESC)
+Enables border padding on all sides of the window for an ultra
+faithful 3DO presentation. Fits in a 4:3 aspect ratio.
+&!Disables many features that are incompatible while enabled
+
+#(CAT_81_OPT_2_DESC)
+The default UQM presentation.
+Fits in a 4:3 aspect ratio.
+
+#(CAT_82_OPTS)
+Prime
+Planets
+MRQ
+StarSeed
+
+#(CAT_82_OPT_0_DESC)
+Original game, as written by the glorious founders. (Default)
+
+#(CAT_82_OPT_1_DESC)
+Seed the generation of planetary resources and solar systems.
+
+#(CAT_82_OPT_2_DESC)
+Seed the locations of Melnorme Traders,
+Rainbow Worlds, and Quasispace Portals,
+and the generation of planetary resources and solar systems.
+
+#(CAT_82_OPT_3_DESC)
+Seed the locations of all plot events into the starmap
+including homeworlds, fleet locations, dialog, and artifacts
+as well as planetary resources and Quasispace.
+
+#(CAT_83_OPTS)
+Default
+Custom
+
+#(CAT_83_OPT_0_DESC)
+Default colors for alien spheres of influence. (Default)
+
+#(CAT_83_OPT_1_DESC)
+Custom distinct colors for alien spheres of influence.
+
+#(CAT_84_OPTS)
+Disabled
+Enabled
+
+#(CAT_84_OPT_0_DESC)
+Scatter a percentage of the elements in the lander's
+cargo hold onto the planet's surface when the lander explodes
+
+#(CAT_84_OPT_1_DESC)
+Scatter a percentage of the elements in the lander's
+cargo hold onto the planet's surface when the lander explodes
+
+#(CAT_85_OPTS)
+Disabled
+Enabled
+
+#(CAT_85_OPT_0_DESC)
+Show Lander upgrade graphics when exploring a planet.
+
+#(CAT_85_OPT_1_DESC)
+Show Lander upgrade graphics when exploring a planet.
+
+#(CAT_86_OPTS)
+Disabled
+Enabled
+
+#(CAT_86_OPT_0_DESC)
+Limits the amount of ships in your fleet based on melee values.
+Max points equals 60 (Easy 90, Hard 30) plus additional points
+equal to 2x each allied race's ship value (Easy 3x, Hard 1x).
+
+#(CAT_86_OPT_1_DESC)
+Limits the amount of ships in your fleet based on melee values.
+Max points equals 60 (Easy 90, Hard 30) plus additional points
+equal to 2x each allied race's ship value (Easy 3x, Hard 1x).
+
+#(CAT_87_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_87_OPT_0_DESC)
+
+#(CAT_87_OPT_1_DESC)
+
+#(CAT_87_OPT_2_DESC)
+
+#(CAT_88_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_88_OPT_0_DESC)
+
+#(CAT_88_OPT_1_DESC)
+
+#(CAT_88_OPT_2_DESC)
+
+#(CAT_89_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_89_OPT_0_DESC)
+
+#(CAT_89_OPT_1_DESC)
+
+#(CAT_89_OPT_2_DESC)
+
+#(CAT_90_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_90_OPT_0_DESC)
+
+#(CAT_90_OPT_1_DESC)
+
+#(CAT_90_OPT_2_DESC)
+
+#(CAT_91_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_91_OPT_0_DESC)
+
+#(CAT_91_OPT_1_DESC)
+
+#(CAT_91_OPT_2_DESC)
+
+#(CAT_92_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_92_OPT_0_DESC)
+
+#(CAT_92_OPT_1_DESC)
+
+#(CAT_92_OPT_2_DESC)
+
+#(CAT_93_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_93_OPT_0_DESC)
+
+#(CAT_93_OPT_1_DESC)
+
+#(CAT_93_OPT_2_DESC)
+
+#(CAT_94_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_94_OPT_0_DESC)
+
+#(CAT_94_OPT_1_DESC)
+
+#(CAT_94_OPT_2_DESC)
+
+#(CAT_95_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_95_OPT_0_DESC)
+
+#(CAT_95_OPT_1_DESC)
+
+#(CAT_95_OPT_2_DESC)
+
+#(CAT_96_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_96_OPT_0_DESC)
+
+#(CAT_96_OPT_1_DESC)
+
+#(CAT_96_OPT_2_DESC)
+
+#(CAT_97_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_97_OPT_0_DESC)
+
+#(CAT_97_OPT_1_DESC)
+
+#(CAT_97_OPT_2_DESC)
+
+#(CAT_98_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_98_OPT_0_DESC)
+
+#(CAT_98_OPT_1_DESC)
+
+#(CAT_98_OPT_2_DESC)
+
+#(CAT_99_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_99_OPT_0_DESC)
+
+#(CAT_99_OPT_1_DESC)
+
+#(CAT_99_OPT_2_DESC)
+
+#(CAT_100_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_100_OPT_0_DESC)
+
+#(CAT_100_OPT_1_DESC)
+
+#(CAT_100_OPT_2_DESC)
+
+#(CAT_101_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_101_OPT_0_DESC)
+
+#(CAT_101_OPT_1_DESC)
+
+#(CAT_101_OPT_2_DESC)
+
+#(CAT_102_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_102_OPT_0_DESC)
+
+#(CAT_102_OPT_1_DESC)
+
+#(CAT_102_OPT_2_DESC)
+
+#(CAT_103_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_103_OPT_0_DESC)
+
+#(CAT_103_OPT_1_DESC)
+
+#(CAT_103_OPT_2_DESC)
+
+#(CAT_104_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_104_OPT_0_DESC)
+
+#(CAT_104_OPT_1_DESC)
+
+#(CAT_104_OPT_2_DESC)
+
+#(CAT_105_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_105_OPT_0_DESC)
+
+#(CAT_105_OPT_1_DESC)
+
+#(CAT_105_OPT_2_DESC)
+
+#(CAT_106_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_106_OPT_0_DESC)
+
+#(CAT_106_OPT_1_DESC)
+
+#(CAT_106_OPT_2_DESC)
+
+#(CAT_107_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_107_OPT_0_DESC)
+
+#(CAT_107_OPT_1_DESC)
+
+#(CAT_107_OPT_2_DESC)
+
+#(CAT_108_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_108_OPT_0_DESC)
+
+#(CAT_108_OPT_1_DESC)
+
+#(CAT_108_OPT_2_DESC)
+
+#(CAT_109_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_109_OPT_0_DESC)
+
+#(CAT_109_OPT_1_DESC)
+
+#(CAT_109_OPT_2_DESC)
+
+#(CAT_110_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_110_OPT_0_DESC)
+
+#(CAT_110_OPT_1_DESC)
+
+#(CAT_110_OPT_2_DESC)
+
+#(CAT_111_OPTS)
+Do Nothing
+Remove Device
+Add Device
+
+#(CAT_111_OPT_0_DESC)
+
+#(CAT_111_OPT_1_DESC)
+
+#(CAT_111_OPT_2_DESC)
+
+#(CAT_112_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_112_OPT_0_DESC)
+
+#(CAT_112_OPT_1_DESC)
+
+#(CAT_112_OPT_2_DESC)
+
+#(CAT_113_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_113_OPT_0_DESC)
+
+#(CAT_113_OPT_1_DESC)
+
+#(CAT_113_OPT_2_DESC)
+
+#(CAT_114_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_114_OPT_0_DESC)
+
+#(CAT_114_OPT_1_DESC)
+
+#(CAT_114_OPT_2_DESC)
+
+#(CAT_115_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_115_OPT_0_DESC)
+
+#(CAT_115_OPT_1_DESC)
+
+#(CAT_115_OPT_2_DESC)
+
+#(CAT_116_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_116_OPT_0_DESC)
+
+#(CAT_116_OPT_1_DESC)
+
+#(CAT_116_OPT_2_DESC)
+
+#(CAT_117_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_117_OPT_0_DESC)
+
+#(CAT_117_OPT_1_DESC)
+
+#(CAT_117_OPT_2_DESC)
+
+#(CAT_118_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_118_OPT_0_DESC)
+
+#(CAT_118_OPT_1_DESC)
+
+#(CAT_118_OPT_2_DESC)
+
+#(CAT_119_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_119_OPT_0_DESC)
+
+#(CAT_119_OPT_1_DESC)
+
+#(CAT_119_OPT_2_DESC)
+
+#(CAT_120_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_120_OPT_0_DESC)
+
+#(CAT_120_OPT_1_DESC)
+
+#(CAT_120_OPT_2_DESC)
+
+#(CAT_121_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_121_OPT_0_DESC)
+
+#(CAT_121_OPT_1_DESC)
+
+#(CAT_121_OPT_2_DESC)
+
+#(CAT_122_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_122_OPT_0_DESC)
+
+#(CAT_122_OPT_1_DESC)
+
+#(CAT_122_OPT_2_DESC)
+
+#(CAT_123_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_123_OPT_0_DESC)
+
+#(CAT_123_OPT_1_DESC)
+
+#(CAT_123_OPT_2_DESC)
+
+#(CAT_124_OPTS)
+Do Nothing
+Remove Upgrade
+Add Upgrade
+
+#(CAT_124_OPT_0_DESC)
+
+#(CAT_124_OPT_1_DESC)
+
+#(CAT_124_OPT_2_DESC)
+
+#(CAT_125_OPTS)
+Disabled
+Enabled
+
+#(CAT_125_OPT_0_DESC)
+Alien races fly their normal ships.
+
+#(CAT_125_OPT_1_DESC)
+Aliens are assigned ships from three classes of ships
+based on the custom seed.
+
+#(CAT_126_OPTS)
+Disabled
+Enabled
+
+#(CAT_126_OPT_0_DESC)
+Ships can be stored at StarBase and retrieved later, and gift ships
+are sent directly to StarBase when they can't join the flagship.
+
+#(CAT_126_OPT_1_DESC)
+Ships can be stored at StarBase and retrieved later, and gift ships
+are sent directly to StarBase when they can't join the flagship.
+
+#(CAT_127_OPTS)
+Disabled
+Enabled
+
+#(CAT_127_OPT_0_DESC)
+When enabled Captain names are displayed above ships in the Shipyard.
+
+#(CAT_127_OPT_1_DESC)
+When enabled Captain names are displayed above ships in the Shipyard.
+
+#(CAT_128_OPTS)
+Disabled
+Enabled
+
+#(CAT_128_OPT_0_DESC)
+SIS display window is replaced by side menu window
+during shipyard purchases only on DOS platform (default).
+
+#(CAT_128_OPT_1_DESC)
+SIS display window is replaced by DOS-style side menu window
+during shipyard purchases on all platforms.
+
+#(CAT_129_OPTS)
+DOS
+3DO
+
+#(CAT_129_OPT_0_DESC)
+Change the shade of red in HyperSpace to the specified version.
+The DOS color is a lighter shade of red.
+The 3DO color is a deeper shade of red.
+
+#(CAT_129_OPT_1_DESC)
+Change the shade of red in HyperSpace to the specified version.
+The DOS color is a lighter shade of red.
+The 3DO color is a deeper shade of red.
+
+#(CAT_130_OPTS)
+Normal Control
+Left Stick Relative
+Right Stick Relative
+Left Stick Auto-Thrust
+Right Stick Auto-Thrust
+
+#(CAT_130_OPT_0_DESC)
+Normal control
+
+#(CAT_130_OPT_1_DESC)
+Ships face the direction of your left analog stick
+
+#(CAT_130_OPT_2_DESC)
+Ships face the direction of your right analog stick
+
+#(CAT_130_OPT_3_DESC)
+Ships face the direction of your left analog stick
+A partial push turns you to face that direction
+A full push thrusts your ship in that direction
+
+#(CAT_130_OPT_4_DESC)
+Ships face the direction of your right analog stick
+A partial push turns you to face that direction
+A full push thrusts your ship in that direction
+
+#(CAT_131_OPTS)
+Disabled
+Manual Control
+Local Auto-Pilot
+
+#(CAT_131_OPT_0_DESC)
+No mouse controls whatsoever.
+
+#(CAT_131_OPT_1_DESC)
+Full menu mouse input.
+Flagship and lander point towards mouse cursor and you
+press the thrust and fire keys.
+
+#(CAT_131_OPT_2_DESC)
+Full menu mouse input.
+Click a location to set flagship and lander auto-pilot.
+
+#(CAT_132_OPTS)
+Disabled
+Enabled
+
+#(CAT_132_OPT_0_DESC)
+Enables relative mouse controls in Super Melee...
+When Crappy Mouse Input is active.
+
+#(CAT_132_OPT_1_DESC)
+Enables relative mouse controls in Super Melee...
+When Crappy Mouse Input is active.
+
+#(CAT_133_OPTS)
+Disabled
+Save PNG
+Copy to Clipboard
+Both
+
+#(CAT_133_OPT_0_DESC)
+No in-game screenshots
+
+#(CAT_133_OPT_1_DESC)
+Save screenshot PNG to the config directory
+
+#(CAT_133_OPT_2_DESC)
+Copy screenshot to the clipboard
+
+#(CAT_133_OPT_3_DESC)
+Save screenshot PNG to the config directory
+and copy screenshot to the clipboard
+
+#(CAT_134_OPTS)
+Disabled
+Enabled
+
+#(CAT_134_OPT_0_DESC)
+Orbit lines are brightened for higher visibility.
+
+#(CAT_134_OPT_1_DESC)
+Orbit lines are brightened for higher visibility.
+
+#(CAT_135_OPTS)
+Disabled
+Enabled
+
+#(CAT_135_OPT_0_DESC)
+Solar System background is dimmed and orbit lines
+have gaps around the planets for higher visibility.
+
+#(CAT_135_OPT_1_DESC)
+Solar System background is dimmed and orbit lines
+have gaps around the planets for higher visibility.
+
+#(CAT_136_OPTS)
+Normal Control
+Left Stick Relative
+Right Stick Relative
+Left Stick Auto-Thrust
+Right Stick Auto-Thrust
+
+#(CAT_136_OPT_0_DESC)
+Lander turns with left/right and thrusts with thrust
+
+#(CAT_136_OPT_1_DESC)
+Lander faces the direction of your left analog stick
+Thrust with the thrust button
+
+#(CAT_136_OPT_2_DESC)
+Lander faces the direction of your right analog stick
+Thrust with the thrust button
+
+#(CAT_136_OPT_3_DESC)
+Lander faces the direction of your left analog stick
+A partial push turns the lander to face that direction
+A full push drives it in that direction
+
+#(CAT_136_OPT_4_DESC)
+Lander faces the direction of your right analog stick
+A partial push turns the lander to face that direction
+A full push drives it in that direction
+
+
+#(SLIDERS)
+Music Volume
+SFX Volume
+Speech Volume
+Gamma Correction
+Nebulae Brightness
+Deadzone Left Stick P1
+Deadzone Right Stick P1
+Deadzone Left Stick P2
+Deadzone Right Stick P2
+
+#(SLIDER_0_DESC)
+Sets the music volume.
+
+#(SLIDER_1_DESC)
+Sets the sound effects volume.
+
+#(SLIDER_2_DESC)
+Sets the speech volume.
+
+#(SLIDER_3_DESC)
+Sets the gamma correction.
+May not work on all hardware.
+
+#(SLIDER_4_DESC)
+Sets the nebulae brightness when nebulae are enabled.
+Default value is: 16
+
+#(SLIDER_5_DESC)
+Edit left stick deadzone for Player 1
+Default value is: 20%
+
+#(SLIDER_5_DESC)
+Edit right stick deadzone for Player 1
+Default value is: 20%
+
+#(SLIDER_5_DESC)
+Edit left stick deadzone for Player 2
+Default value is: 20%
+
+#(SLIDER_5_DESC)
+Edit right stick deadzone for Player 2
+Default value is: 20%
+
+#(BUTTONS)
+Quit Setup
+Return to Setup
+Graphics
+PC / 3DO
+Sound
+Cheats
+Controls
+Advanced
+Edit Flight Controls
+Back to Controls
+Music
+Visuals
+Quality of Life
+Devices
+Upgrades
+Return to Cheats
+Edit Menu Controls
+Save Menu Bindings
+Cancel
+Load Defaults
+Edit Axis Deadzones
+Accessibility
+
+#(BUTTON_0_DESC)
+
+
+Save changes and return to main menu.
+
+#(BUTTON_1_DESC)
+
+
+Return to the Setup menu.
+
+#(BUTTON_2_DESC)
+Configure display options for UQM.
+Graphics drivers, resolution, and scalers.
+
+#(BUTTON_3_DESC)
+Configure the behavior of UQM
+to more closely match the PC or 3DO behavior.
+
+#(BUTTON_4_DESC)
+Configure sound and audio options for UQM.
+
+#(BUTTON_5_DESC)
+Some cheats are not meant for new players, please review the
+descriptions to determine if they are appropriate for you.
+
+#(BUTTON_6_DESC)
+Set up keyboard and joystick controls.
+
+Currently partially implemented.
+
+#(BUTTON_7_DESC)
+Options that can't be categorized anywhere else.
+These options can affect the look, feel, and gameplay
+
+#(BUTTON_8_DESC)
+Edit key control sets.
+
+#(BUTTON_9_DESC)
+
+
+Return to control set selection screen.
+
+#(BUTTON_10_DESC)
+Configure music options for UQM.
+
+#(BUTTON_11_DESC)
+Configure the look and feel of the MegaMod.
+
+#(BUTTON_12_DESC)
+Configure the Quality of Life additions in MegaMod.
+
+#(BUTTON_13_DESC)
+Add and/or Remove devices from a New or Loaded game.
+
+#(BUTTON_14_DESC)
+Add and/or Remove upgrades from a New or Loaded game.
+
+#(BUTTON_15_DESC)
+
+
+Return to the Cheat options menu.
+
+#(BUTTON_16_DESC)
+Edit the key bindings for menu navigation and actions.
+
+#(BUTTON_17_DESC)
+Save the current menu key bindings to override.cfg.
+
+#(BUTTON_18_DESC)
+Discard changes and revert to the last saved menu bindings.
+
+#(BUTTON_19_DESC)
+Load the default menu key bindings.
+
+#(BUTTON_20_DESC)
+Edit gamepad axis deadzones
+
+#(BUTTON_21_DESC)
+Configure accessibility options
+
+#(LABELS)
+Incomplete
+Keyconfig header
+Editkey header
+Editkey dialog
+Spacer
+UI
+Melee
+IP
+Scanning
+
+#(LABEL_0)
+This part of the configuration
+has not yet been implemented.
+
+Expect it in a future version.
+
+#(LABEL_1)
+To view or edit key controls,
+select the option below:
+
+#(LABEL_2)
+Press Return to edit, or Delete to remove
+
+#(LABEL_3)
+Please press the key, button,
+or joystick direction you wish
+to assign to this action.
+
+#(LABEL_4)
+
+
+#(LABEL_5)
+&_User Interface Options
+
+#(LABEL_6)
+&_Conversation Screen Options
+
+#(LABEL_7)
+&_Star System View Options
+
+#(LABEL_8)
+&_Orbit Screen Options
+
+
+#(TEXT_ENTRIES)
+Custom Seed
+Custom Resolution
+
+#(TEXT_ENTRIES_INITIAL)
+16807
+Placeholder
+
+#(TEXT_ENTRY_0_DESC)
+Change the seed for random planet generation.
+Only works for New Games.
+Default value is: 16807
+
+#(TEXT_ENTRY_1_DESC)
+Set the resolution to a custom value.
+Only applicable to Exclusive Fullscreen
+and the `Fill Window' aspect ratio
+
+#(CONTROL_ENTRIES)
+Up
+Down
+Left
+Right
+Weapon
+Special
+Escape
+Thrust
+
+#(MENUCONTROL_ENTRIES)
+Pause
+Exit
+Abort
+Debug 1
+Fullscreen
+Up
+Down
+Left
+Right
+Select
+Cancel
+Special
+Page-Up
+Page-Down
+Home
+End
+Zoom-In
+Zoom-Out
+Delete
+Backspace
+Cancel Edit
+Star Search
+Tab / Next
+Set StarMap
+Screenshot
+Quick Save
+Quick Load
+ImGui
+Debug 2
+Debug 3
+Debug 4
+Mouse Left
+Mouse Right
+Mouse Middle
+Mouse Wheel Up
+Mouse Wheel Down
