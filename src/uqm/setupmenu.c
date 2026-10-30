@@ -1026,9 +1026,41 @@ addon_unavailable (WIDGET_CHOICE *self, int oldval)
 	Widget_SetFont (PlyrFont);
 }
 
+// Conversions between the Graphics choice and the resolution factor
+static unsigned int
+resChoiceToFactor (int choice)
+{
+	switch (choice)
+	{
+		case OPTVAL_REAL_2560_1920:
+			return UHD;
+		case OPTVAL_REAL_1280_960:
+			return HD;
+		default:
+			return 0;
+	}
+}
+
+static int
+resFactorToChoice (unsigned int factor)
+{
+	if (factor >= UHD)
+		return OPTVAL_REAL_2560_1920;
+	return factor >= HD ? OPTVAL_REAL_1280_960 : OPTVAL_320_240;
+}
+
 static void
 check_for_hd (WIDGET_CHOICE *self, int oldval)
 {
+	if (self->selected == OPTVAL_REAL_2560_1920 &&
+			!isAddonAvailable (UHD_MODE))
+	{	// No 4K pack: fall back to HD if possible
+		int fallback = isAddonAvailable (HD_MODE) ?
+				OPTVAL_REAL_1280_960 : OPTVAL_320_240;
+		addon_unavailable (self, fallback);
+		return;
+	}
+
 	if (self->selected != OPTVAL_REAL_1280_960)
 		return;
 
@@ -1044,8 +1076,9 @@ check_for_hd (WIDGET_CHOICE *self, int oldval)
 static BOOLEAN
 check_dos_3do_modes (WIDGET_CHOICE *self, int oldval)
 {
-	bool selected = choices[CHOICE_GRAPHICS].selected;
-	int shmagoigle = (selected && !IS_HD) ? HD : IS_HD;
+	// Resolution the window-mode packs have to exist for: the one that is
+	// selected in the Graphics choice
+	int shmagoigle = (int)resChoiceToFactor (choices[CHOICE_GRAPHICS].selected);
 
 	switch (self->selected)
 	{
@@ -2968,7 +3001,7 @@ GetGlobalOptions (GLOBALOPTS *opts)
 /*
  *		Graphics options
  */
-	opts->screenResolution = resolutionFactor >> 1;
+	opts->screenResolution = resFactorToChoice (resolutionFactor);
 
 	if (GfxFlags & TFB_GFXFLAGS_FULLSCREEN)
 		opts->fullscreen = 2;
@@ -3035,13 +3068,13 @@ GetGlobalOptions (GLOBALOPTS *opts)
 	switch (opts->windowType)
 	{
 		case OPTVAL_PC_WINDOW:
-			if (!isAddonAvailable (DOS_MODE (IS_HD)))
+			if (!isAddonAvailable (DOS_MODE (RESOLUTION_FACTOR)))
 			{
 				opts->windowType = 2;
 			}
 			break;
 		case OPTVAL_3DO_WINDOW:
-			if (!isAddonAvailable (THREEDO_MODE (IS_HD)))
+			if (!isAddonAvailable (THREEDO_MODE (RESOLUTION_FACTOR)))
 			{
 				opts->windowType = 2;
 			}
@@ -3266,7 +3299,7 @@ SetGlobalOptions (GLOBALOPTS *opts)
  *		Graphics options
  */
 
-	newFactor = (int)(opts->screenResolution << 1);
+	newFactor = (int)resChoiceToFactor (opts->screenResolution);
 	PutIntOpt (&resFactor, &newFactor, "config.resolutionfactor", TRUE);
 
 	if (resFactor != (int)resolutionFactor)

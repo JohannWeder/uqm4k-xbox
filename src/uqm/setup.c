@@ -151,23 +151,28 @@ LoadKernel (int argc, char *argv[])
 		loadAddon ("yellow-fried-sd");
 		loadAddon ("PurpleQuanSD");
 	} 
-	else if (loadAddon ("mm-hd"))
+	else if (loadAddon (IS_UHD ? UHD_MODE : HD_MODE))
 	{
 		HDPackPresent = TRUE;
-		solTexturesPresent = loadAddon ("sol-textures-hd");
-		loadAddon ("yellow-fried-hd");
-		loadAddon ("PurpleQuanHD");
-		if (optWindowType == 2)
+		// The remaining HD add-ons are drawn at HD size; there are no 4K
+		// versions of them yet.
+		if (!IS_UHD)
 		{
-			classicPackPresent =
-					optNoClassic ? FALSE : loadAddon ("classic-pack");
+			solTexturesPresent = loadAddon ("sol-textures-hd");
+			loadAddon ("yellow-fried-hd");
+			loadAddon ("PurpleQuanHD");
+			if (optWindowType == 2)
+			{
+				classicPackPresent =
+						optNoClassic ? FALSE : loadAddon ("classic-pack");
+			}
 		}
 	}
 
-	if (IS_PAD && isAddonAvailable (THREEDO_MODE (IS_HD)))
-		loadAddon (THREEDO_MODE (IS_HD));
-	if (IS_DOS && isAddonAvailable (DOS_MODE (IS_HD)))
-		loadAddon (DOS_MODE (IS_HD));
+	if (IS_PAD && isAddonAvailable (THREEDO_MODE (RESOLUTION_FACTOR)))
+		loadAddon (THREEDO_MODE (RESOLUTION_FACTOR));
+	if (IS_DOS && isAddonAvailable (DOS_MODE (RESOLUTION_FACTOR)))
+		loadAddon (DOS_MODE (RESOLUTION_FACTOR));
 
 	usingSpeech = (BOOLEAN)optSpeech;
 	if (optSpeech && !loadAddon ("mm-3dovoice"))
@@ -211,9 +216,9 @@ LoadKernel (int argc, char *argv[])
 		
 		loadAddon ("automods-sd");
 	}
-	else if (HDPackPresent)
+	else if (HDPackPresent && !IS_UHD)
 	{
-		// Localization addons
+		// Localization addons (HD size only; no 4K versions yet)
 		loadAddon ("xlat-finnish-hd");
 		loadAddon ("xlat-german-hd");
 		loadAddon ("xlat-japanese-hd");

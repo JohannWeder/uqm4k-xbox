@@ -188,9 +188,12 @@ extern ADDON_COUNT addonList;
 #define VOL_RMX_MUSIC "volasaurus-remix-pack"
 #define REGION_MUSIC  "SpaceMusic"
 #define HD_MODE       "mm-hd"
+#define UHD_MODE      "4k"
 
-#define DOS_MODE(a)      ((a) ? "dos-mode-hd" : "dos-mode-sd")
-#define THREEDO_MODE(a)  ((a) ? "3do-mode-hd" : "3do-mode-sd")
+// The argument is a resolution factor: 0 (SD), 2 (HD) or 3 (4K). A boolean
+// IS_HD (0 or 1) selects SD or HD.
+#define DOS_MODE(a)      ((a) >= 3 ? "dos-mode-4k" : ((a) ? "dos-mode-hd" : "dos-mode-sd"))
+#define THREEDO_MODE(a)  ((a) >= 3 ? "3do-mode-4k" : ((a) ? "3do-mode-hd" : "3do-mode-sd"))
 #define WINDOW_MODE(a,b) ((b) == 0 ? DOS_MODE(a) : THREEDO_MODE(a))
 
 #define BASE_CONTENT_NAME "mm-" MM_BASE_VERSION_S "-content.uqm"

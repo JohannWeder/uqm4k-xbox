@@ -206,7 +206,7 @@ InitShipStatus (SHIP_INFO *SIPtr, STARSHIP *StarShipPtr, RECT *pClipRect, BOOLEA
 			crew_height = ((MIN(SIPtr->max_crew, MAX_CREW_SIZE) + 1) & ~1) + 1;
 		else
 			crew_height = ((MIN(SIPtr->max_crew, MAX_CREW_SIZE) + 1) * RES_SCALE (1));
-		energy_height = (((SIPtr->max_energy + 1) >> 1) << RES_TRP (1)) + RES_SCALE (1);
+		energy_height = (((SIPtr->max_energy + 1) >> 1) << (IS_HD ? RESOLUTION_FACTOR + 1 : 1)) + RES_SCALE (1);
 #undef MIN
 		
 		if (!IS_HD)

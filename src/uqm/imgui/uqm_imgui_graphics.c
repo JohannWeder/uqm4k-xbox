@@ -58,7 +58,8 @@ void draw_graphics_menu (void)
 				else
 					GLOBAL (CurrentActivity) |= CHECK_ABORT;
 
-				resolutionFactor = res_factor ? 2 : 0;
+				resolutionFactor = res_factor ?
+						(resolutionFactor >= UHD ? UHD : HD) : 0;
 				optRequiresReload = TRUE;
 
 				res_PutInteger ("config.resolutionfactor", resolutionFactor);

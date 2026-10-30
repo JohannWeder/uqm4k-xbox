@@ -87,6 +87,17 @@ read_16s (void *fp, SWORD *v)
 	return read_16 (fp, (UWORD *) v);
 }
 
+// COORD is 32 bits: read a 16 bit signed value into it.
+static inline size_t
+read_coord (void *fp, COORD *v)
+{
+	SWORD t = 0;
+	size_t ret = read_16s (fp, &t);
+	if (v)
+		*v = t;
+	return ret;
+}
+
 static inline size_t
 read_32 (void *fp, DWORD *v)
 {
@@ -214,17 +225,17 @@ LoadRaceQueue (void *fh, QUEUE *pQueue, DWORD size)
 		read_16 (fh, &FleetPtr->max_crew);
 		read_8  (fh, &FleetPtr->growth);
 		read_8  (fh, &FleetPtr->max_energy);
-		read_16s(fh, &FleetPtr->loc.x);
-		read_16s(fh, &FleetPtr->loc.y);
+		read_coord(fh, &FleetPtr->loc.x);
+		read_coord(fh, &FleetPtr->loc.y);
 
 		read_16 (fh, &FleetPtr->actual_strength);
 		read_16 (fh, &FleetPtr->known_strength);
-		read_16s(fh, &FleetPtr->known_loc.x);
-		read_16s(fh, &FleetPtr->known_loc.y);
+		read_coord(fh, &FleetPtr->known_loc.x);
+		read_coord(fh, &FleetPtr->known_loc.y);
 		read_8  (fh, &FleetPtr->growth_err_term);
 		read_8  (fh, &FleetPtr->func_index);
-		read_16s(fh, &FleetPtr->dest_loc.x);
-		read_16s(fh, &FleetPtr->dest_loc.y);
+		read_coord(fh, &FleetPtr->dest_loc.x);
+		read_coord(fh, &FleetPtr->dest_loc.y);
 
 		UnlockFleetInfo (pQueue, hStarShip);
 	}
@@ -251,8 +262,8 @@ LoadGroupQueue (void *fh, QUEUE *pQueue, DWORD size)
 		read_8  (fh, &GroupPtr->dest_loc);
 		read_8  (fh, &GroupPtr->orbit_pos);
 		read_8  (fh, &GroupPtr->group_id); /* was max_energy */
-		read_16s(fh, &GroupPtr->loc.x);
-		read_16s(fh, &GroupPtr->loc.y);
+		read_coord(fh, &GroupPtr->loc.x);
+		read_coord(fh, &GroupPtr->loc.y);
 
 		UnlockIpGroup (pQueue, hGroup);
 	}
@@ -267,12 +278,12 @@ LoadEncounter (ENCOUNTER *EncounterPtr, void *fh, BOOLEAN try_core)
 	EncounterPtr->succ = 0;
 	EncounterPtr->hElement = 0;
 	read_16s (fh, &EncounterPtr->transition_state);
-	read_16s (fh, &EncounterPtr->origin.x);
-	read_16s (fh, &EncounterPtr->origin.y);
+	read_coord (fh, &EncounterPtr->origin.x);
+	read_coord (fh, &EncounterPtr->origin.y);
 	read_16  (fh, &EncounterPtr->radius);
 	// former STAR_DESC fields
-	read_16s (fh, &EncounterPtr->loc_pt.x);
-	read_16s (fh, &EncounterPtr->loc_pt.y);
+	read_coord (fh, &EncounterPtr->loc_pt.x);
+	read_coord (fh, &EncounterPtr->loc_pt.y);
 	read_8   (fh, &EncounterPtr->race_id);
 	read_8   (fh, &EncounterPtr->num_ships);
 	read_8   (fh, &EncounterPtr->flags);
@@ -351,13 +362,13 @@ LoadGameState (GAME_STATE *GSPtr, void *fh, BOOLEAN try_core)
 
 	LoadClockState (&GSPtr->GameClock, fh);
 
-	read_16s (fh, &GSPtr->autopilot.x);
-	read_16s (fh, &GSPtr->autopilot.y);
-	read_16s (fh, &GSPtr->ip_location.x);
-	read_16s (fh, &GSPtr->ip_location.y);
+	read_coord (fh, &GSPtr->autopilot.x);
+	read_coord (fh, &GSPtr->autopilot.y);
+	read_coord (fh, &GSPtr->ip_location.x);
+	read_coord (fh, &GSPtr->ip_location.y);
 	/* STAMP ShipStamp */
-	read_16s (fh, &GSPtr->ShipStamp.origin.x);
-	read_16s (fh, &GSPtr->ShipStamp.origin.y);
+	read_coord (fh, &GSPtr->ShipStamp.origin.x);
+	read_coord (fh, &GSPtr->ShipStamp.origin.y);
 	read_16  (fh, &GSPtr->ShipFacing);
 	read_8   (fh, &GSPtr->ip_planet);
 	read_8   (fh, &GSPtr->in_orbit);
@@ -368,14 +379,14 @@ LoadGameState (GAME_STATE *GSPtr, void *fh, BOOLEAN try_core)
 
 	/* VELOCITY_DESC velocity */
 	read_16  (fh, &GSPtr->velocity.TravelAngle);
-	read_16s (fh, &GSPtr->velocity.vector.width);
-	read_16s (fh, &GSPtr->velocity.vector.height);
-	read_16s (fh, &GSPtr->velocity.fract.width);
-	read_16s (fh, &GSPtr->velocity.fract.height);
-	read_16s (fh, &GSPtr->velocity.error.width);
-	read_16s (fh, &GSPtr->velocity.error.height);
-	read_16s (fh, &GSPtr->velocity.incr.width);
-	read_16s (fh, &GSPtr->velocity.incr.height);
+	read_coord (fh, &GSPtr->velocity.vector.width);
+	read_coord (fh, &GSPtr->velocity.vector.height);
+	read_coord (fh, &GSPtr->velocity.fract.width);
+	read_coord (fh, &GSPtr->velocity.fract.height);
+	read_coord (fh, &GSPtr->velocity.error.width);
+	read_coord (fh, &GSPtr->velocity.error.height);
+	read_coord (fh, &GSPtr->velocity.incr.width);
+	read_coord (fh, &GSPtr->velocity.incr.height);
 	
 	if (LOBYTE (GSPtr->CurrentActivity) != IN_INTERPLANETARY)
 	{	// Let's make savegames work even between different resolution modes.
@@ -577,8 +588,8 @@ LoadSummary (SUMMARY_DESC *SummPtr, void *fp, BOOLEAN try_core)
 static void
 LoadStarDesc (STAR_DESC *SDPtr, void *fh)
 {
-	read_16s(fh, &SDPtr->star_pt.x);
-	read_16s(fh, &SDPtr->star_pt.y);
+	read_coord(fh, &SDPtr->star_pt.x);
+	read_coord(fh, &SDPtr->star_pt.y);
 	read_8  (fh, &SDPtr->Type);
 	read_8  (fh, &SDPtr->Index);
 	read_8  (fh, &SDPtr->Prefix);
@@ -643,8 +654,8 @@ LoadGroupList (uio_Stream *fh, DWORD chunksize)
 			read_8   (fh, &ip.dest_loc);
 			read_8   (fh, &ip.orbit_pos);
 			read_8   (fh, &ip.group_id);
-			read_16s (fh, &ip.loc.x);
-			read_16s (fh, &ip.loc.y);
+			read_coord (fh, &ip.loc.x);
+			read_coord (fh, &ip.loc.y);
 
 			swrite_8 (fp, race_outer);
 			WriteIpGroup (fp, &ip);

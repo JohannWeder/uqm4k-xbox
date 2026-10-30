@@ -31,17 +31,31 @@ extern int CanvasHeight;
 
 		/* Most basic resolution units. */
 #define HD 2
+#define UHD 3
+		// Resolution levels: 0 is SD (320x240), HD is 4x (1280x960) and UHD
+		// is 8x (2560x1920, "4K"). Each level is drawn on a canvas of
+		// 320x240 << level.
 #define SCREEN_WIDTH CanvasWidth
 #define SCREEN_HEIGHT CanvasHeight
 #define RESOLUTION_FACTOR resolutionFactor
-#define IS_HD (RESOLUTION_FACTOR != HD ? FALSE : TRUE)
+#define IS_HD (RESOLUTION_FACTOR >= HD)
+		// True for HD and for UHD: the high-resolution art and layout family
+#define IS_UHD (RESOLUTION_FACTOR >= UHD)
 #define RES_SCALE(a) ((a) << RESOLUTION_FACTOR)
 #define RES_DESCALE(a) ((a) >> RESOLUTION_FACTOR)
-#define RES_BOOL(a,b) (!IS_HD ? (a) : (b))
+#define UHD_SCALE(a) ((a) * (IS_UHD ? 1 << (RESOLUTION_FACTOR - HD) : 1))
+		// Scales a value that was tuned in HD pixels to the current level
+#define RES_BOOL(a,b) (!IS_HD ? (a) : UHD_SCALE (b))
+		// SD value 'a', or the HD pixel value 'b' scaled up for UHD.
+		// Only for lengths/speeds; use RES_CHOOSE for anything else.
+#define RES_CHOOSE(a,b) (!IS_HD ? (a) : (b))
+		// SD value 'a', or 'b' for both HD and UHD, with no scaling
+		// (strings, rates, counts, pointers, ...)
 #define NRES_BOOL(a) (!IS_HD ? (a) : 0)
-#define RES_DBL(a) (RES_BOOL ((a), (a) * RESOLUTION_FACTOR))
-#define RES_TRP(a) (RES_BOOL ((a), (a) * 3))
+#define RES_DBL(a) (RES_BOOL ((a), (a) * 2))
+		// 'a' in SD, twice that in HD and four times that in UHD
 #define IF_HD(a) (RES_BOOL (0, (a)))
+		// A pixel adjustment that only applies in HD/UHD
 
 #define RES_RBSHIFT(a,b) (RES_SCALE (RES_DESCALE ((a)) >> (b)))
 #define RES_RECENTER(a) (RES_RBSHIFT ((a), 1))

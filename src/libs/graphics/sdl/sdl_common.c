@@ -603,9 +603,9 @@ TFB_ScreenShot (void)
 		"%Y-%m-%d_%H-%M-%S", tm);
 
 	len = snprintf(NULL, 0,
-			"%s%s v%d.%d.%d %s.png", shotDirName, curTime,
+			"%s%s v%d.%d.%d %s%s.png", shotDirName, curTime,
 			UQM_MAJOR_VERSION, UQM_MINOR_VERSION, UQM_PATCH_VERSION,
-			RES_BOOL(UQM_EXTRA_VERSION, "HD " UQM_EXTRA_VERSION));
+			UQM_RES_LABEL (resolutionFactor), UQM_EXTRA_VERSION);
 	
 	if (len < 0)
 		return;
@@ -615,9 +615,9 @@ TFB_ScreenShot (void)
 		return;
 
 	snprintf (fullPath, len + 1,
-			"%s%s v%d.%d.%d %s.png", shotDirName, curTime,
+			"%s%s v%d.%d.%d %s%s.png", shotDirName, curTime,
 			UQM_MAJOR_VERSION, UQM_MINOR_VERSION, UQM_PATCH_VERSION,
-			RES_BOOL (UQM_EXTRA_VERSION, "HD " UQM_EXTRA_VERSION));
+			UQM_RES_LABEL (resolutionFactor), UQM_EXTRA_VERSION);
 
 	if (stat (shotDirName, &sb) == 0 && S_ISDIR (sb.st_mode))
 	{

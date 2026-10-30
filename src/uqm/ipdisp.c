@@ -155,7 +155,7 @@ zoomRadiusForLocation (BYTE location)
 }
 
 static inline void
-adjustDeltaVforZoom (SIZE zoom, SIZE *dx, SIZE *dy)
+adjustDeltaVforZoom (SIZE zoom, SDWORD *dx, SDWORD *dy)
 {
 	if (zoom == MIN_ZOOM_RADIUS)
 	{
@@ -191,7 +191,7 @@ ip_group_preprocess (ELEMENT *ElementPtr)
 	BYTE target_loc, group_loc, flagship_loc;
 	SIZE radius;
 	POINT dest_pt;
-	SIZE vdx, vdy;
+	SDWORD vdx, vdy;
 	ELEMENT *EPtr;
 	IP_GROUP *GroupPtr;
 
@@ -320,7 +320,7 @@ ip_group_preprocess (ELEMENT *ElementPtr)
 #endif /* NEVER */
 	{
 		BOOLEAN Transition, isOrbiting;
-		SIZE dx, dy;
+		SDWORD dx, dy;
 		SIZE delta_x, delta_y;
 		COUNT angle;
 		FRAME suggestedFrame;
@@ -899,7 +899,8 @@ flag_ship_preprocess (ELEMENT *ElementPtr)
 
 	{
 		BYTE flagship_loc, ec;
-		SIZE vdx, vdy, radius;
+		SDWORD vdx, vdy;
+		SIZE radius;
 		POINT pt;
 
 		GetCurrentVelocityComponents (&GLOBAL (velocity), &vdx, &vdy);

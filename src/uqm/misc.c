@@ -305,7 +305,7 @@ crew_preprocess (ELEMENT *ElementPtr)
 	if (hTarget)
 	{
 #define CREW_DELTA RES_SCALE (SCALED_ONE)
-		SIZE delta;
+		SDWORD delta;
 		ELEMENT *ShipPtr;
 
 		LockElement (hTarget, &ShipPtr);
@@ -357,7 +357,7 @@ void
 AbandonShip (ELEMENT *ShipPtr, ELEMENT *TargetPtr,
 		COUNT crew_loss)
 {
-	SIZE dx, dy;
+	SDWORD dx, dy;
 	COUNT direction;
 	RECT r;
 	STARSHIP *StarShipPtr;

@@ -228,7 +228,7 @@ static void
 sis_hyper_preprocess (ELEMENT *ElementPtr)
 {
 	SDWORD udx = 0, udy = 0;
-	SIZE dx = 0, dy = 0;
+	SDWORD dx = 0, dy = 0;
 	SIZE AccelerateDirection;
 	STARSHIP *StarShipPtr;
 
@@ -265,8 +265,8 @@ sis_hyper_preprocess (ELEMENT *ElementPtr)
 			GetCurrentVelocityComponents (&ElementPtr->velocity,
 					&dx, &dy);
 
-			udx = RES_BOOL (dx << 4, (SDWORD)dx);
-			udy = RES_BOOL (dy << 4, (SDWORD)dy);
+			udx = RES_CHOOSE (dx << 4, (SDWORD)dx);
+			udy = RES_CHOOSE (dy << 4, (SDWORD)dy);
 			
 			StarShipPtr->cur_status_flags &= ~THRUST;
 		}
@@ -334,8 +334,8 @@ sis_hyper_preprocess (ELEMENT *ElementPtr)
 		else
 		{
 			AccelerateDirection = -1;
-			udx = dx << IF_HD (4);
-			udy = dy << IF_HD (4);
+			udx = dx << (IS_HD ? 4 : 0);
+			udy = dy << (IS_HD ? 4 : 0);
 		}
 	}
 

@@ -288,7 +288,7 @@ ilwrath_preprocess (ELEMENT *ElementPtr)
 					if (TrackShip (ElementPtr, &facing) >= 0)
 					{
 						ELEMENT *eptr;
-						SIZE dx0, dy0, dx1, dy1;
+						SDWORD dx0, dy0, dx1, dy1;
 						VELOCITY_DESC v;
 
 						LockElement (ElementPtr->hTarget, &eptr);

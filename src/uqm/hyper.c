@@ -848,7 +848,7 @@ static void
 init_transition (ELEMENT *ElementPtr0, ELEMENT *ElementPtr1,
 		TRANSITION_TYPE which_transition)
 {
-	SIZE dx, dy;
+	SDWORD dx, dy;
 	SIZE num_turns;
 	STARSHIP *StarShipPtr;
 
@@ -1005,7 +1005,7 @@ hyper_collision (ELEMENT *ElementPtr0, POINT *pPt0,
 	if ((ElementPtr1->state_flags & PLAYER_SHIP)
 			&& GET_GAME_STATE (PORTAL_COUNTER) == 0)
 	{
-		SIZE dx, dy;
+		SDWORD dx, dy;
 		POINT pt;
 		STAR_DESC *SDPtr;
 		STARSHIP *StarShipPtr;
@@ -1567,7 +1567,7 @@ ProcessEncounter (ENCOUNTER *EncounterPtr, POINT *puniverse,
 	}
 	else
 	{
-		SIZE delta_x, delta_y;
+		SDWORD delta_x, delta_y;
 		COUNT encounter_radius;
 
 		ElementPtr->life_span = 1;

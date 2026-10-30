@@ -89,7 +89,7 @@ inertial_thrust (ELEMENT *ElementPtr)
 	else
 	{
 		SIZE delta_x, delta_y;
-		SIZE cur_delta_x, cur_delta_y;
+		SDWORD cur_delta_x, cur_delta_y;
 		DWORD desired_speed, max_speed;
 		DWORD current_speed;
 

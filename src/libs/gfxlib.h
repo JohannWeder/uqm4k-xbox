@@ -54,7 +54,10 @@ typedef UWORD TIME_VALUE;
 #define TIME_SHIFT 8
 #define MAX_TIME_VALUE ((1 << TIME_SHIFT) + 1)
 
-typedef SWORD COORD;
+// 32 bits: in 4K mode battle (world) coordinates reach 65536, which does not
+// fit a SWORD. Code that reads or writes a COORD through a pointer must use
+// COORD-sized variables (see read_coord() in load.c).
+typedef SDWORD COORD;
 
 static inline bool
 sameColor(Color c1, Color c2)

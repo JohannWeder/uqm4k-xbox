@@ -66,7 +66,7 @@ int UniChar_isPrint(UniChar ch);
 UniChar UniChar_toUpper(UniChar ch);
 UniChar UniChar_toLower(UniChar ch);
 
-UNICODE *AlignText (const UNICODE *str, sint16 *loc_x);
+UNICODE *AlignText (const UNICODE *str, sint32 *loc_x);
 UNICODE *AddPadd (const UNICODE *str, sint16 *padding);
 
 #undef UNICODE_CHAR

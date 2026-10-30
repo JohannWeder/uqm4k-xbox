@@ -29,8 +29,8 @@
 void
 collide (ELEMENT *ElementPtr0, ELEMENT *ElementPtr1)
 {
-	SIZE speed;
-	SIZE dx0, dy0, dx1, dy1, dx_rel, dy_rel;
+	SDWORD speed;
+	SDWORD dx0, dy0, dx1, dy1, dx_rel, dy_rel;
 	SIZE TravelAngle0, TravelAngle1, ImpactAngle0, ImpactAngle1;
 	SIZE RelTravelAngle, Directness;
 
@@ -48,7 +48,7 @@ collide (ELEMENT *ElementPtr0, ELEMENT *ElementPtr1)
 	dx_rel = dx0 - dx1;
 	dy_rel = dy0 - dy1;
 	RelTravelAngle = ARCTAN (dx_rel, dy_rel);
-	speed = square_root ((long)dx_rel * dx_rel + (long)dy_rel * dy_rel);
+	speed = square_root (VelocitySquared (dx_rel, dy_rel));
 
 	Directness = NORMALIZE_ANGLE (RelTravelAngle - ImpactAngle0);
 	if (Directness <= QUADRANT || Directness >= HALF_CIRCLE + QUADRANT)
@@ -117,7 +117,7 @@ collide (ELEMENT *ElementPtr0, ELEMENT *ElementPtr1)
 				}
 			}
 
-			speed = (SIZE)(scalar / ((long)mass0 * (mass0 + mass1)));
+			speed = (SDWORD)(scalar / ((long)mass0 * (mass0 + mass1)));
 			DeltaVelocityComponents (&ElementPtr0->velocity,
 					COSINE (ImpactAngle0, speed),
 					SINE (ImpactAngle0, speed));
@@ -154,7 +154,7 @@ collide (ELEMENT *ElementPtr0, ELEMENT *ElementPtr1)
 				}
 			}
 
-			speed = (SIZE)(scalar / ((long)mass1 * (mass0 + mass1)));
+			speed = (SDWORD)(scalar / ((long)mass1 * (mass0 + mass1)));
 			DeltaVelocityComponents (&ElementPtr1->velocity,
 					COSINE (ImpactAngle1, speed),
 					SINE (ImpactAngle1, speed));

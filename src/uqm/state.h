@@ -112,6 +112,17 @@ sread_16s (GAME_STATE_FILE *fp, SWORD *v)
 	return ret;
 }
 
+// COORD is 32 bits: read a 16 bit signed value into it.
+static inline COUNT
+sread_coord (GAME_STATE_FILE *fp, COORD *v)
+{
+	SWORD t = 0;
+	COUNT ret = sread_16s (fp, &t);
+	if (v)
+		*v = t;
+	return ret;
+}
+
 static inline COUNT
 sread_32 (GAME_STATE_FILE *fp, DWORD *v)
 {

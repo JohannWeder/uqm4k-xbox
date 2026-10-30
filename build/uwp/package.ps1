@@ -68,7 +68,9 @@ Copy-Item "$here\Assets\*.png" "$layout\Assets" -Force
 Copy-Item "$repo\LICENSE" "$layout\COPYING.txt" -Force
 
 # Content is large (~28k files); robocopy only copies what changed.
-robocopy "$repo\content" "$layout\content" /MIR /XF .gitignore README.md /NFL /NDL /NJH /NJS /NP | Out-Null
+# The 4K packs are left out of the Xbox package for now (large; the 4K mode
+# is still being developed).
+robocopy "$repo\content" "$layout\content" /MIR /XF .gitignore README.md /XD "$repo\content\addons\4k" "$repo\content\addons\3do-mode-4k" "$repo\content\addons\dos-mode-4k" /NFL /NDL /NJH /NJS /NP | Out-Null
 if ($LASTEXITCODE -ge 8) { throw "robocopy failed copying content ($LASTEXITCODE)" }
 
 if ($Register)

@@ -569,7 +569,7 @@ DrawPlanet (int tintY, Color tintColor)
 
 			// Draw gradient
 			SetContextForeGroundColor (tintColor);
-			for (i = 204; i > 0; i -= RES_BOOL (68, 17))
+			for (i = 204; i > 0; i -= RES_CHOOSE (68, 17))
 			{
 				SetContextDrawMode (MAKE_DRAW_MODE (DRAW_ADDITIVE, i));
 				DrawFilledRectangle (&edge);

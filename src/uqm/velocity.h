@@ -38,12 +38,14 @@ typedef struct velocity_desc
 #define ZeroVelocityComponents(pv) memset(pv,0,sizeof (*(pv)))
 #define GetVelocityTravelAngle(pv) (pv)->TravelAngle
 
-extern void GetCurrentVelocityComponents (VELOCITY_DESC *velocityptr, SIZE *pdx, SIZE *pdy);
+// Velocity components are SDWORD: at 4K a fast shot exceeds 32767 once scaled
+// by VELOCITY_SCALE.
+extern void GetCurrentVelocityComponents (VELOCITY_DESC *velocityptr, SDWORD *pdx, SDWORD *pdy);
 
 // JMS_GFX: New function to prevent overflows in hi-res.
 extern void GetCurrentVelocityComponentsSdword (VELOCITY_DESC *velocityptr, SDWORD *pdx, SDWORD *pdy);
 
-extern void GetNextVelocityComponents (VELOCITY_DESC *velocityptr, SIZE *pdx, SIZE *pdy, COUNT num_frames);
+extern void GetNextVelocityComponents (VELOCITY_DESC *velocityptr, SDWORD *pdx, SDWORD *pdy, COUNT num_frames);
 
 // JMS_GFX: New function to prevent overflows in hi-res.
 extern void GetNextVelocityComponentsSdword (VELOCITY_DESC *velocityptr, SDWORD *pdx, SDWORD *pdy, DWORD num_frames);
@@ -63,9 +65,9 @@ IsVelocityZero (VELOCITY_DESC *vptr)
 }
 
 static inline DWORD
-VelocitySquared (SIZE dx, SIZE dy)
+VelocitySquared (SDWORD dx, SDWORD dy)
 {
-	return (DWORD)((long)dx * dx + (long)dy * dy);
+	return (DWORD)((SDWORD)dx * dx) + (DWORD)((SDWORD)dy * dy);
 }
 
 #define VELOCITY_SHIFT 5

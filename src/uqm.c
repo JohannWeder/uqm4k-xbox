@@ -487,20 +487,19 @@ int main(int argc, char** argv)
 
 	if (options.runMode == runMode_version)
 	{
-		printf ("%d.%d.%d %s\n", UQM_MAJOR_VERSION, UQM_MINOR_VERSION,
+		printf ("%d.%d.%d %s%s\n", UQM_MAJOR_VERSION, UQM_MINOR_VERSION,
 				UQM_PATCH_VERSION,
-				(resolutionFactor ? "HD " UQM_EXTRA_VERSION :
-					UQM_EXTRA_VERSION));
+				UQM_RES_LABEL (resolutionFactor), UQM_EXTRA_VERSION);
 		log_showBox (false, false);
 		return EXIT_SUCCESS;
 	}
 	
-	log_add (log_User, "The Ur-Quan Masters v%d.%d.%d %s (compiled %s %s)\n"
+	log_add (log_User, "The Ur-Quan Masters v%d.%d.%d %s%s (compiled %s %s)\n"
 			"This software comes with ABSOLUTELY NO WARRANTY;\n"
 			"for details see the included 'COPYING' file.\n",
 			UQM_MAJOR_VERSION, UQM_MINOR_VERSION,
 			UQM_PATCH_VERSION,
-			(resolutionFactor ? "HD " UQM_EXTRA_VERSION : UQM_EXTRA_VERSION),
+			UQM_RES_LABEL (resolutionFactor), UQM_EXTRA_VERSION,
 			__DATE__, __TIME__);
 #ifdef NETPLAY
 	log_add (log_User, "Netplay protocol version %d.%d. Netplay opponent "
@@ -701,6 +700,15 @@ int main(int argc, char** argv)
 
 	resolutionFactor = isAddonAvailable (HD_MODE) ?
 		(unsigned int)options.resolutionFactor.value : 0;
+	// 4K needs its own art pack; without it, fall back to HD
+	if (resolutionFactor > UHD)
+		resolutionFactor = UHD;
+	if (resolutionFactor == UHD && !isAddonAvailable (UHD_MODE))
+	{
+		log_add (log_Warning, "4K graphics requested but the '%s' add-on "
+				"was not found; using HD.", UHD_MODE);
+		resolutionFactor = HD;
+	}
 	options.resolutionFactor.value = resolutionFactor;
 	options.resolutionFactor.set = true;
 

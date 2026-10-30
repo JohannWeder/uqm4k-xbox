@@ -592,7 +592,7 @@ UniChar_toLower(UniChar ch)
 
 
 UNICODE *
-AlignText (const UNICODE *str, sint16 *loc_x)
+AlignText (const UNICODE *str, sint32 *loc_x)
 {
 	int modSize = 0;
 	int first_pos = utf8StringPos ((unsigned char *)str, UNICHAR_PIPE);

@@ -47,6 +47,7 @@ typedef enum {
 typedef enum {
 	OPTVAL_320_240,
 	OPTVAL_REAL_1280_960,
+	OPTVAL_REAL_2560_1920,
 } OPT_RESTYPE;
 
 typedef enum {

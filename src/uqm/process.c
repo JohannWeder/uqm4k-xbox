@@ -164,7 +164,7 @@ PreProcess (ELEMENT *ElementPtr)
 
 		if (!(state_flags & IGNORE_VELOCITY))
 		{
-			SIZE delta_x, delta_y;
+			SDWORD delta_x, delta_y;
 
 			GetNextVelocityComponents (&ElementPtr->velocity,
 					&delta_x, &delta_y, 1);

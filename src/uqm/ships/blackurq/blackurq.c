@@ -192,7 +192,7 @@ buzztrack_preprocess (ELEMENT *ElementPtr)
 		}
 		else
 		{
-			SIZE delta_x, delta_y;
+			SDWORD delta_x, delta_y;
 			ELEMENT *eptr;
 
 			LockElement (ElementPtr->hTarget, &eptr);

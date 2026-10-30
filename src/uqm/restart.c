@@ -454,9 +454,9 @@ DrawRestartMenuGraphic (MENU_STATE *pMS)
 	// Put the version number in the bottom right corner.
 	SetContextFont (TinyFont);
 	SetContextForeGroundColor (WHITE_COLOR);
-	snprintf (buf, sizeof (buf), "v%d.%d.%d %s",
+	snprintf (buf, sizeof (buf), "v%d.%d.%d %s%s",
 			UQM_MAJOR_VERSION, UQM_MINOR_VERSION, UQM_PATCH_VERSION,
-			RES_BOOL (UQM_EXTRA_VERSION, "HD " UQM_EXTRA_VERSION));
+			UQM_RES_LABEL (RESOLUTION_FACTOR), UQM_EXTRA_VERSION);
 	t.pStr = buf;
 	t.baseline.x = SCREEN_WIDTH - RES_SCALE (2);
 	t.baseline.y = SCREEN_HEIGHT - RES_SCALE (2);

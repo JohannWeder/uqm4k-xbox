@@ -206,7 +206,7 @@ spawn_point_defense (ELEMENT *ElementPtr)
 			if (ObjectPtr != ShipPtr && CollidingElement (ObjectPtr) &&
 					!OBJECT_CLOAKED (ObjectPtr))
 			{
-				SIZE delta_x, delta_y;
+				SDWORD delta_x, delta_y;
 
 				delta_x = ObjectPtr->next.location.x -
 						ShipPtr->next.location.x;

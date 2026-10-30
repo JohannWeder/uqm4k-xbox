@@ -25,12 +25,9 @@
 #define VELOCITY_REMAINDER(v) ((v) & (VELOCITY_SCALE - 1))
 
 void
-GetCurrentVelocityComponents (VELOCITY_DESC *velocityptr, SIZE *pdx, SIZE *pdy)
+GetCurrentVelocityComponents (VELOCITY_DESC *velocityptr, SDWORD *pdx, SDWORD *pdy)
 {
-	*pdx = WORLD_TO_VELOCITY (velocityptr->vector.width)
-	+ (velocityptr->fract.width - (SIZE)HIBYTE (velocityptr->incr.width));
-	*pdy = WORLD_TO_VELOCITY (velocityptr->vector.height)
-	+ (velocityptr->fract.height - (SIZE)HIBYTE (velocityptr->incr.height));
+	GetCurrentVelocityComponentsSdword (velocityptr, pdx, pdy);
 }
 
 void
@@ -43,27 +40,9 @@ GetCurrentVelocityComponentsSdword (VELOCITY_DESC *velocityptr, SDWORD *pdx, SDW
 }
 
 void
-GetNextVelocityComponents (VELOCITY_DESC *velocityptr, SIZE *pdx, SIZE *pdy, COUNT num_frames)
+GetNextVelocityComponents (VELOCITY_DESC *velocityptr, SDWORD *pdx, SDWORD *pdy, COUNT num_frames)
 {
-	COUNT e;
-	
-	e = (COUNT)((COUNT)velocityptr->error.width +
-				((COUNT)velocityptr->fract.width * num_frames));
-	
-	*pdx = (velocityptr->vector.width * num_frames)
-	+ ((SIZE)((SBYTE)LOBYTE (velocityptr->incr.width))
-	   * (e >> VELOCITY_SHIFT));
-	
-	velocityptr->error.width = VELOCITY_REMAINDER (e);
-	
-	e = (COUNT)((COUNT)velocityptr->error.height +
-				((COUNT)velocityptr->fract.height * num_frames));
-	
-	*pdy = (velocityptr->vector.height * num_frames)
-	+ ((SIZE)((SBYTE)LOBYTE (velocityptr->incr.height))
-	   * (e >> VELOCITY_SHIFT));
-	
-	velocityptr->error.height = VELOCITY_REMAINDER (e);
+	GetNextVelocityComponentsSdword (velocityptr, pdx, pdy, num_frames);
 }
 
 // JMS_GFX: New function to prevent overflows in hi-res.
@@ -96,7 +75,7 @@ void
 SetVelocityVector (VELOCITY_DESC *velocityptr, SDWORD magnitude, COUNT facing)
 {
 	COUNT angle;
-	SIZE dx, dy;
+	SDWORD dx, dy;
 	
 	angle = velocityptr->TravelAngle =
 	FACING_TO_ANGLE (NORMALIZE_FACING (facing));

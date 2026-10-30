@@ -154,9 +154,9 @@ TFB_Pure_ConfigureVideo (int driver, int flags, int width, int height,
 	(void) togglefullscreen; /* satisfy compiler (unused parameter) */
 	(void) windowType; /* satisfy compiler (unused parameter) */
 
-	snprintf (caption, sizeof (caption), "The Ur-Quan Masters v%d.%d.%d %s",
+	snprintf (caption, sizeof (caption), "The Ur-Quan Masters v%d.%d.%d %s%s",
 			UQM_MAJOR_VERSION, UQM_MINOR_VERSION, UQM_PATCH_VERSION,
-			(resFactor ? "HD " UQM_EXTRA_VERSION : UQM_EXTRA_VERSION));
+			UQM_RES_LABEL (resFactor), UQM_EXTRA_VERSION);
 
 	if (window == NULL)
 	{

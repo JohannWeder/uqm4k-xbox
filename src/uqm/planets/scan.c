@@ -1254,7 +1254,7 @@ ScanPlanet (COUNT scanType)
 #define SCAN_LINES      RES_SCALE (SCAN_LINES_OG)
 #define SCAN_LINE_WAIT  (SCAN_DURATION / SCAN_LINES_OG)
 	// For taming the scan FPS on underpowered devices
-#define SCAN_LINE_FPS  (ONE_SECOND / RES_BOOL (42, 60))
+#define SCAN_LINE_FPS  (ONE_SECOND / RES_CHOOSE (42, 60))
 
 	COUNT startScan, endScan;
 	COUNT scan;
@@ -1643,10 +1643,10 @@ generateBioNode (SOLARSYS_STATE *system, ELEMENT *NodeElementPtr,
 		j = (DWORD)TFB_Random ();
 
 		NodeElementPtr->current.location.x = 
-				((RES_BOOL (LOBYTE (i), LOWORD (j)) %
+				((RES_CHOOSE (LOBYTE (i), LOWORD (j)) %
 					(SCALED_MAP_WIDTH - (8 << 1))) + 8);
 		NodeElementPtr->current.location.y = 
-				(RES_BOOL (HIBYTE (i), HIWORD (j)) %
+				(RES_CHOOSE (HIBYTE (i), HIWORD (j)) %
 					(MAP_HEIGHT - (8 << 1))) + 8;
 	}
 

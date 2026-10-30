@@ -1816,7 +1816,7 @@ static UWORD
 flagship_inertial_thrust (COUNT CurrentAngle)
 {
 	SIZE max_ship_speed;
-	SIZE cur_delta_x, cur_delta_y;
+	SDWORD cur_delta_x, cur_delta_y;
 	COUNT TravelAngle, thrust_increment;
 	VELOCITY_DESC *VelocityPtr;
 

@@ -217,7 +217,7 @@ draw_settings_menu (void)
 	Spacer ();
 
 	ImGui_Text ("%s v0.8.0", UQM_TITLE_S);
-	ImGui_Text ("%s%s v%s", (IS_HD ? "HD " : ""),
+	ImGui_Text ("%s%s v%s", UQM_RES_LABEL (RESOLUTION_FACTOR),
 		UQM_EXTRA_VERSION, MM_BASE_VERSION_S);
 
 	Spacer ();

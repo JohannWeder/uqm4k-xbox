@@ -167,7 +167,7 @@ comet_preprocess (ELEMENT *ElementPtr)
 	{
 		if (frame_index == 25)
 		{
-			SIZE cur_delta_x, cur_delta_y;
+			SDWORD cur_delta_x, cur_delta_y;
 			STARSHIP *StarShipPtr;
 
 			GetElementStarShip (ElementPtr, &StarShipPtr);
@@ -823,7 +823,7 @@ samatra_preprocess (ELEMENT *ElementPtr)
 			{ -580 + 32,  188 - 24},
 		};
 
-		offs = RES_BOOL (offs_orig, offs_hd);
+		offs = RES_CHOOSE (offs_orig, offs_hd);
 
 		for (StarShipPtr->RaceDescPtr->num_generators = 0;
 				StarShipPtr->RaceDescPtr->num_generators < MAX_GENERATORS;
@@ -848,11 +848,11 @@ samatra_preprocess (ELEMENT *ElementPtr)
 						);
 				GeneratorPtr->current.location.x =
 						((LOG_SPACE_WIDTH >> 1)
-						+ DISPLAY_TO_WORLD ((offs[StarShipPtr->RaceDescPtr->num_generators].x)))
+						+ DISPLAY_TO_WORLD (UHD_SCALE (offs[StarShipPtr->RaceDescPtr->num_generators].x)))
 						& ~((SCALED_ONE << MAX_VIS_REDUCTION) - 1);
 				GeneratorPtr->current.location.y =
 						((LOG_SPACE_HEIGHT >> 1)
-						+ DISPLAY_TO_WORLD ((offs[StarShipPtr->RaceDescPtr->num_generators].y)))
+						+ DISPLAY_TO_WORLD (UHD_SCALE (offs[StarShipPtr->RaceDescPtr->num_generators].y)))
 						& ~((SCALED_ONE << MAX_VIS_REDUCTION) - 1);
 				GeneratorPtr->current.image.farray =
 						StarShipPtr->RaceDescPtr->ship_data.special;

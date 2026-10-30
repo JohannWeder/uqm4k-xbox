@@ -161,6 +161,7 @@ Lander Stick Control
 #(CAT_0_OPTS)
 Original
 HD
+4K
 
 #(CAT_0_OPT_0_DESC)
 Lo-res 320x240 resolution.
@@ -170,6 +171,11 @@ Available with SDL framebuffer or OpenGL.
 #(CAT_0_OPT_1_DESC)
 Hi-res 1280x960 resolution.
 Requires `Hires' package installed.
+&!UQM will reload when changed.
+
+#(CAT_0_OPT_2_DESC)
+4K 2560x1920 resolution.
+Requires the `4k' package installed.
 &!UQM will reload when changed.
 
 #(CAT_1_OPTS)

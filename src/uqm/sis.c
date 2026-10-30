@@ -747,7 +747,7 @@ DrawFlagshipName (BOOLEAN InStatusArea, bool NewGame)
 			SetContextForeGroundColor (FLAGSHIP_NAME_BACKGROUND_COLOR);
 		}
 
-		DrawFilledRectangle (RES_BOOL (&r, &rHD));
+		DrawFilledRectangle (RES_CHOOSE (&r, &rHD));
 	}
 
 	if (!NewGame)

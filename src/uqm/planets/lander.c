@@ -1504,12 +1504,12 @@ AddLightning (void)
 		LightningElementPtr->next.location.x = (curLanderLoc.x
 				+ ((SCALED_MAP_WIDTH << MAG_SHIFT)
 				- ((SURFACE_WIDTH >> 1) - RES_SCALE (6)))
-				+ (RES_BOOL (LOBYTE (rand_val), rand_val)
+				+ (RES_CHOOSE (LOBYTE (rand_val), rand_val)
 				% (SURFACE_WIDTH - RES_SCALE (12))))
 				% (SCALED_MAP_WIDTH << MAG_SHIFT);
 		LightningElementPtr->next.location.y = (curLanderLoc.y
 				+ ((MAP_HEIGHT << MAG_SHIFT) - ((SURFACE_HEIGHT >> 1)
-				- RES_SCALE (6))) + (RES_BOOL (HIBYTE (rand_val), rand_val)
+				- RES_SCALE (6))) + (RES_CHOOSE (HIBYTE (rand_val), rand_val)
 				% (SURFACE_HEIGHT - RES_SCALE (12))))
 				% (MAP_HEIGHT << MAG_SHIFT);
 
@@ -1634,7 +1634,7 @@ BuildObjectList (void)
 	for (hElement = GetHeadElement ();
 			hElement; hElement = hNextElement)
 	{
-		SIZE dx, dy;
+		SDWORD dx, dy;
 		ELEMENT *ElementPtr;
 
 		LockElement (hElement, &ElementPtr);
@@ -2131,7 +2131,7 @@ LanderFire (SIZE facing)
 {
 #define SHUTTLE_FIRE_WAIT (isPC (optSuperPC) ? 10 : 14)
 	HELEMENT hWeaponElement;
-	SIZE wdx, wdy;
+	SDWORD wdx, wdy;
 	ELEMENT *WeaponElementPtr;
 	COUNT angle;
 
@@ -2422,8 +2422,8 @@ static BOOLEAN
 DoPlanetSide (LanderInputState *pMS)
 {
 	int cursor =  CURSOR_DISABLE;
-	SIZE dx = 0;
-	SIZE dy = 0;
+	SDWORD dx = 0;
+	SDWORD dy = 0;
 
 #define SHUTTLE_TURN_WAIT (isPC (optSuperPC) ? 1 : 3)
 	if (GLOBAL (CurrentActivity) & CHECK_ABORT)
@@ -2844,7 +2844,7 @@ LandingTakeoffSequence (LanderInputState *inputState, BOOLEAN landing)
 	delta = 0;
 	// JMS_GFX: In HD graphics we run out of default offsets. -> Use larger
 	// offset value.
-	max_offsets = RES_BOOL (MAX_OFFSETS, MAX_OFFSETS_HD);
+	max_offsets = RES_CHOOSE (MAX_OFFSETS, MAX_OFFSETS_HD);
 
 	for (index = 0; index < max_offsets && delta < DISTANCE_COVERED;
 			++index)

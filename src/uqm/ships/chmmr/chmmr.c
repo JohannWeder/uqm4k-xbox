@@ -356,7 +356,8 @@ chmmr_postprocess (ELEMENT *ElementPtr)
 			LockElement (ElementPtr->hTarget, &ShipElementPtr);
 			if (!GRAVITY_MASS (ShipElementPtr->mass_points + 1))
 			{
-				SIZE i, dx, dy;
+				SIZE i;
+				SDWORD dx, dy;
 				COUNT angle, magnitude;
 				STARSHIP *EnemyStarShipPtr;
 				static const SIZE shadow_offs[] =

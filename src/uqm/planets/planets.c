@@ -419,8 +419,8 @@ DrawOrbitMapGraphic (void)
 		STAMP ss;
 		PLANET_DESC *pPlanetDesc;
 		PLANET_ORBIT *Orbit = &pSolarSysState->Orbit;
-		int PlanetScale = RES_BOOL (319, 512);
-		int PlanetRescale = 1275;
+		int PlanetScale = RES_CHOOSE (319, 512);
+		int PlanetRescale = UHD_SCALE (1275);
 
 		pPlanetDesc = pSolarSysState->pOrbitalDesc;
 		GeneratePlanetSurface (
@@ -428,7 +428,7 @@ DrawOrbitMapGraphic (void)
 		ss.origin.x = RES_SCALE (ORIG_SIS_SCREEN_WIDTH >> 1);
 		ss.origin.y = RES_SCALE (191);
 
-		ss.frame = RES_BOOL (Orbit->SphereFrame, CaptureDrawable (
+		ss.frame = RES_CHOOSE (Orbit->SphereFrame, CaptureDrawable (
 			RescaleFrame (
 				Orbit->SphereFrame, PlanetRescale, PlanetRescale
 			)));

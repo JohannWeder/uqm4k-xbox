@@ -58,7 +58,7 @@ static RECT ArrowRect;
 // Oscilloscope frame rate
 // Should be <= COMM_ANIM_RATE
 // XXX: was 32 picked experimentally?
-#define OSCILLOSCOPE_RATE   (ONE_SECOND / RES_BOOL (32, 60))
+#define OSCILLOSCOPE_RATE   (ONE_SECOND / RES_CHOOSE (32, 60))
 
 // Maximum comm animation frame rate (actual execution rate)
 // A gfx frame is not always produced during an execution frame,

@@ -107,6 +107,22 @@ typedef struct
 
 static BOOLEAN DoPresentation (void *pIS);
 
+// Presentation scripts name the HD pack's files (FONT4X, ANI4X). At 4K the
+// same files come from the 4K pack.
+static void
+RedirectToUHDPack (char *path)
+{
+	static const char hdPrefix[] = "addons/" HD_MODE "/";
+	static const char uhdPrefix[] = "addons/" UHD_MODE "/";
+
+	if (!IS_UHD || strncmp (path, hdPrefix, sizeof hdPrefix - 1) != 0)
+		return;
+
+	memmove (path + sizeof uhdPrefix - 1, path + sizeof hdPrefix - 1,
+			strlen (path + sizeof hdPrefix - 1) + 1);
+	memcpy (path, uhdPrefix, sizeof uhdPrefix - 1);
+}
+
 static BOOLEAN
 ParseColorString (const char *Src, Color* pColor)
 {
@@ -808,6 +824,7 @@ DoPresentation (void *pIS)
 				log_add (log_Warning, "Bad FONT command '%s'", pStr);
 				continue;
 			}
+			RedirectToUHDPack (pPIS->Buffer);
 			pFont = &pPIS->Fonts[index];
 			
 			if (pPIS->Buffer[0])
@@ -835,6 +852,7 @@ DoPresentation (void *pIS)
 		else if (strcmp (Opcode, "ANI4X") == 0 && IS_HD)
 		{	/* set ani */
 			utf8StringCopy (pPIS->Buffer, sizeof (pPIS->Buffer), pStr);
+			RedirectToUHDPack (pPIS->Buffer);
 			if (pPIS->Frame)
 				DestroyDrawable (ReleaseDrawable (pPIS->Frame));
 			pPIS->Frame = CaptureDrawable (LoadGraphicFile (pPIS->Buffer));

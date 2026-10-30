@@ -118,8 +118,8 @@ ReadIpGroup (GAME_STATE_FILE *fp, IP_GROUP *GroupPtr)
 	GroupPtr->dest_loc = LONIBBLE (tmpb);
 	GroupPtr->orbit_pos = HINIBBLE (tmpb);
 	sread_8  (fp, &GroupPtr->group_id); /* was max_energy */
-	sread_16s(fp, &GroupPtr->loc.x);
-	sread_16s(fp, &GroupPtr->loc.y);
+	sread_coord(fp, &GroupPtr->loc.x);
+	sread_coord(fp, &GroupPtr->loc.y);
 }
 
 void

@@ -44,6 +44,9 @@
 #define MM_BASE_VERSION_S \
 		UQM_MAJOR_VERSION_S "." UQM_MINOR_VERSION_S "." UQM_PATCH_VERSION_S
 
+// Prefix for the version shown in titles and logs, for resolution factor rf
+#define UQM_RES_LABEL(rf) ((rf) >= 3 ? "4K " : ((rf) ? "HD " : ""))
+
 #define UQM_STRING_VERSION \
 		UQM_MAJOR_VERSION_S "." UQM_MINOR_VERSION_S "." UQM_PATCH_VERSION_S \
 		" " UQM_EXTRA_VERSION

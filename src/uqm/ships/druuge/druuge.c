@@ -136,7 +136,7 @@ cannon_collision (ELEMENT *ElementPtr0, POINT *pPt0,
 			&& !GRAVITY_MASS (ElementPtr1->mass_points + 1))
 	{
 		COUNT angle;
-		SIZE cur_delta_x, cur_delta_y;
+		SDWORD cur_delta_x, cur_delta_y;
 		STARSHIP *StarShipPtr;
 
 		GetElementStarShip (ElementPtr1, &StarShipPtr);

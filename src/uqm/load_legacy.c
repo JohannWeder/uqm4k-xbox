@@ -491,6 +491,17 @@ cread_16s (DECODE_REF fh, SWORD *v)
 	return ret;
 }
 
+// COORD is 32 bits: read a 16 bit signed value into it.
+static inline COUNT
+cread_coord (DECODE_REF fh, COORD *v)
+{
+	SWORD t = 0;
+	COUNT ret = cread_16s (fh, &t);
+	if (v)
+		*v = t;
+	return ret;
+}
+
 static inline COUNT
 cread_32 (DECODE_REF fh, DWORD *v)
 {
@@ -685,17 +696,17 @@ LoadRaceQueue (DECODE_REF fh, QUEUE *pQueue)
 		FleetPtr->max_crew = tmpb;
 		cread_8  (fh, &FleetPtr->growth);
 		cread_8  (fh, &FleetPtr->max_energy);
-		cread_16s(fh, &FleetPtr->loc.x);
-		cread_16s(fh, &FleetPtr->loc.y);
+		cread_coord(fh, &FleetPtr->loc.x);
+		cread_coord(fh, &FleetPtr->loc.y);
 
 		cread_16 (fh, &FleetPtr->actual_strength);
 		cread_16 (fh, &FleetPtr->known_strength);
-		cread_16s(fh, &FleetPtr->known_loc.x);
-		cread_16s(fh, &FleetPtr->known_loc.y);
+		cread_coord(fh, &FleetPtr->known_loc.x);
+		cread_coord(fh, &FleetPtr->known_loc.y);
 		cread_8  (fh, &FleetPtr->growth_err_term);
 		cread_8  (fh, &FleetPtr->func_index);
-		cread_16s(fh, &FleetPtr->dest_loc.x);
-		cread_16s(fh, &FleetPtr->dest_loc.y);
+		cread_coord(fh, &FleetPtr->dest_loc.x);
+		cread_coord(fh, &FleetPtr->dest_loc.y);
 		cread_16 (fh, NULL); /* alignment padding */
 
 		UnlockFleetInfo (pQueue, hStarShip);
@@ -734,8 +745,8 @@ LoadGroupQueue (DECODE_REF fh, QUEUE *pQueue)
 		GroupPtr->dest_loc = LONIBBLE (tmpb);
 		GroupPtr->orbit_pos = HINIBBLE (tmpb);
 		cread_8  (fh, &GroupPtr->group_id); /* was max_energy */
-		cread_16s(fh, &GroupPtr->loc.x);
-		cread_16s(fh, &GroupPtr->loc.y);
+		cread_coord(fh, &GroupPtr->loc.x);
+		cread_coord(fh, &GroupPtr->loc.y);
 
 		UnlockIpGroup (pQueue, hGroup);
 	}
@@ -754,12 +765,12 @@ LoadEncounter (ENCOUNTER *EncounterPtr, DECODE_REF fh, BOOLEAN try_vanilla)
 	cread_ptr (fh); /* useless ptr; HELEMENT hElement */
 	EncounterPtr->hElement = 0;
 	cread_16s (fh, &EncounterPtr->transition_state);
-	cread_16s (fh, &EncounterPtr->origin.x);
-	cread_16s (fh, &EncounterPtr->origin.y);
+	cread_coord (fh, &EncounterPtr->origin.x);
+	cread_coord (fh, &EncounterPtr->origin.y);
 	cread_16  (fh, &EncounterPtr->radius);
 	// former STAR_DESC fields
-	cread_16s (fh, &EncounterPtr->loc_pt.x);
-	cread_16s (fh, &EncounterPtr->loc_pt.y);
+	cread_coord (fh, &EncounterPtr->loc_pt.x);
+	cread_coord (fh, &EncounterPtr->loc_pt.y);
 	cread_8   (fh, &EncounterPtr->race_id);
 	cread_8   (fh, &tmpb);
 	EncounterPtr->num_ships = tmpb & ENCOUNTER_SHIPS_MASK;
@@ -888,13 +899,13 @@ LoadGameState (GAME_STATE *GSPtr, DECODE_REF fh, BOOLEAN vanilla)
 	cread_16  (fh, NULL); /* CLOCK_STATE alignment padding */
 	LoadClockState (&GSPtr->GameClock, fh);
 
-	cread_16s (fh, &GSPtr->autopilot.x);
-	cread_16s (fh, &GSPtr->autopilot.y);
-	cread_16s (fh, &GSPtr->ip_location.x);
-	cread_16s (fh, &GSPtr->ip_location.y);
+	cread_coord (fh, &GSPtr->autopilot.x);
+	cread_coord (fh, &GSPtr->autopilot.y);
+	cread_coord (fh, &GSPtr->ip_location.x);
+	cread_coord (fh, &GSPtr->ip_location.y);
 	/* STAMP ShipStamp */
-	cread_16s (fh, &GSPtr->ShipStamp.origin.x);
-	cread_16s (fh, &GSPtr->ShipStamp.origin.y);
+	cread_coord (fh, &GSPtr->ShipStamp.origin.x);
+	cread_coord (fh, &GSPtr->ShipStamp.origin.y);
 	cread_16  (fh, &GSPtr->ShipFacing);
 	cread_8   (fh, &GSPtr->ip_planet);
 	cread_8   (fh, &GSPtr->in_orbit);
@@ -905,14 +916,14 @@ LoadGameState (GAME_STATE *GSPtr, DECODE_REF fh, BOOLEAN vanilla)
 
 	/* VELOCITY_DESC velocity */
 	cread_16  (fh, &GSPtr->velocity.TravelAngle);
-	cread_16s (fh, &GSPtr->velocity.vector.width);
-	cread_16s (fh, &GSPtr->velocity.vector.height);
-	cread_16s (fh, &GSPtr->velocity.fract.width);
-	cread_16s (fh, &GSPtr->velocity.fract.height);
-	cread_16s (fh, &GSPtr->velocity.error.width);
-	cread_16s (fh, &GSPtr->velocity.error.height);
-	cread_16s (fh, &GSPtr->velocity.incr.width);
-	cread_16s (fh, &GSPtr->velocity.incr.height);
+	cread_coord (fh, &GSPtr->velocity.vector.width);
+	cread_coord (fh, &GSPtr->velocity.vector.height);
+	cread_coord (fh, &GSPtr->velocity.fract.width);
+	cread_coord (fh, &GSPtr->velocity.fract.height);
+	cread_coord (fh, &GSPtr->velocity.error.width);
+	cread_coord (fh, &GSPtr->velocity.error.height);
+	cread_coord (fh, &GSPtr->velocity.incr.width);
+	cread_coord (fh, &GSPtr->velocity.incr.height);
 	cread_16  (fh, NULL); /* VELOCITY_DESC padding */
 	
 	// JMS: Let's make savegames work even between different resolution modes.
@@ -1100,8 +1111,8 @@ LoadSummary (SUMMARY_DESC *SummPtr, void *fp, BOOLEAN try_vanilla)
 static void
 LoadStarDesc (STAR_DESC *SDPtr, DECODE_REF fh)
 {
-	cread_16s(fh, &SDPtr->star_pt.x);
-	cread_16s(fh, &SDPtr->star_pt.y);
+	cread_coord(fh, &SDPtr->star_pt.x);
+	cread_coord(fh, &SDPtr->star_pt.y);
 	cread_8  (fh, &SDPtr->Type);
 	cread_8  (fh, &SDPtr->Index);
 	cread_8  (fh, &SDPtr->Prefix);

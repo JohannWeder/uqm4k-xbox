@@ -92,7 +92,7 @@ initialize_missile (MISSILE_BLOCK *pMissileBlock)
 	hMissileElement = AllocElement ();
 	if (hMissileElement)
 	{
-		SIZE delta_x, delta_y;
+		SDWORD delta_x, delta_y;
 		COUNT angle;
 		ELEMENT *MissileElementPtr;
 
@@ -318,7 +318,8 @@ ModifySilhouette (ELEMENT *ElementPtr, STAMP *modify_stamp,
 SIZE
 TrackShip (ELEMENT *Tracker, COUNT *pfacing)
 {
-	SIZE best_delta_facing, best_delta;
+	SIZE best_delta_facing;
+	SDWORD best_delta;
 	HELEMENT hShip, hNextShip;
 	ELEMENT *Trackee;
 
@@ -352,7 +353,8 @@ CheckTracking:
 			if (Trackee->life_span
 					&& StarShipPtr->RaceDescPtr->ship_info.crew_level)
 			{
-				SIZE delta_x, delta_y, delta_facing;
+				SDWORD delta_x, delta_y;
+				SIZE delta_facing;
 
 				if (Tracker->state_flags & PRE_PROCESS)
 				{

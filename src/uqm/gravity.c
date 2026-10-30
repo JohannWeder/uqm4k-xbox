@@ -44,8 +44,8 @@ CalculateGravity (ELEMENT *ElementPtr)
 				&& (TestHasGravity =
 				GRAVITY_MASS (TestElementPtr->mass_points + 1)) != HasGravity)
 		{
-			COUNT abs_dx, abs_dy;
-			SIZE dx, dy;
+			SDWORD abs_dx, abs_dy;
+			SDWORD dx, dy;
 
 			if (!(ElementPtr->state_flags & PRE_PROCESS))
 			{
