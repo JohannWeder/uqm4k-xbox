@@ -31,9 +31,15 @@ sound driver.
 & "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\amd64\MSBuild.exe" `
     build\uwp\UrQuanMastersUWP.vcxproj /p:Configuration=Release /p:Platform=x64 /m
 
-.\build\uwp\package.ps1              # layout + signed UQM-MegaMod.msix
+.\build\uwp\package.ps1              # layout + signed UQM4K-Xbox.msix
 .\build\uwp\package.ps1 -Register    # also register the layout on this PC
+.\build\uwp\package.ps1 -Version 2026.1.1.0   # use a specific version
 ```
+
+`package.ps1` stamps the package version with the packaging time,
+`YYYY.MM.DD.HHMM` (for example `2026.10.29.1530`). Every package is newer
+than the last, so it installs as an update. `Package.appxmanifest` keeps a
+placeholder version; only the packaged copy is stamped.
 
 The build also builds SDL (via `SDL-UWP.vcxproj`) and `deps\uqm-deps.vcxproj`
 (zlib, libpng, ogg, vorbis as one static lib). Everything goes to
@@ -45,7 +51,7 @@ The build also builds SDL (via `SDL-UWP.vcxproj`) and `deps\uqm-deps.vcxproj`
 |---|---|
 | `UrQuanMastersUWP.vcxproj.in` | Project template. Edit this, not the generated `.vcxproj`. |
 | `make-vcxproj.ps1` | Fills the template with the desktop project's source list. |
-| `Package.appxmanifest` | App identity, tiles and capabilities. `Publisher` must match the signing cert. |
+| `Package.appxmanifest` | App identity (`UQM4K.Xbox`), tiles and capabilities. `Publisher` must match the signing cert. Changing `Name` or `Publisher` makes it a different app, with separate saves. |
 | `package.ps1` | Builds the layout and the signed `.msix`, and can register it on the PC. |
 | `deps\` | Static-lib project for zlib/libpng/ogg/vorbis, plus `pnglibconf.h`. |
 | `include\SDL2\` | Forwarding headers so ImGui's `<SDL2/...>` includes resolve. |
@@ -55,7 +61,7 @@ The build also builds SDL (via `SDL-UWP.vcxproj`) and `deps\uqm-deps.vcxproj`
 
 - **Config folder:** config, saves and `uqm.log` live in the app's LocalState
   folder, not `%APPDATA%\UQM-MegaMod`. On a PC that's
-  `%LOCALAPPDATA%\Packages\UQM.MegaMod_<id>\LocalState`.
+  `%LOCALAPPDATA%\Packages\UQM4K.Xbox_<id>\LocalState`.
 - **Content:** read from the package's install folder (`content\`).
 - **Clipboard screenshots:** not available.
 
@@ -65,7 +71,10 @@ The build also builds SDL (via `SDL-UWP.vcxproj`) and `deps\uqm-deps.vcxproj`
    Center developer account).
 2. Open Device Portal: in Dev Home, note the address and browse to it from
    your PC.
-3. **Add** an app, choose `UQM-MegaMod.msix`, and add the dependency
+3. **Add** an app, choose `UQM4K-Xbox.msix`, and add the dependency
    `C:\Program Files (x86)\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\Appx\Retail\x64\Microsoft.VCLibs.x64.14.00.appx`.
 4. In Dev Home, set the app's type to **Game** (under View details), so it
    gets game-level CPU, GPU and memory.
+
+Builds made before the rename used the identity `UQM.MegaMod`. That's a
+separate app: uninstall it by hand if it's still installed.

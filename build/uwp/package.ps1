@@ -3,9 +3,14 @@
 # Run after building build\uwp\UrQuanMastersUWP.vcxproj.  Produces, under
 # build\uwp\out\<Platform>\<Configuration>\:
 #   layout\                 the unpacked app (exe, SDL2.dll, assets, content)
-#   UQM-MegaMod.msix        the signed package, for Xbox Device Portal
-#   UQM-MegaMod-dev.cer     the signing certificate (public part)
+#   UQM4K-Xbox.msix         the signed package, for Xbox Device Portal
+#   UQM4K-Xbox-dev.cer      the signing certificate (public part)
 #
+# The package version is stamped with the packaging time, YYYY.MM.DD.HHMM
+# (e.g. 2026.10.29.1530), so every package is newer than the last and
+# installs as an update.
+#
+# -Version   overrides the stamped version (four parts, each 0-65535).
 # -Register  registers layout\ on this PC (needs Windows Developer Mode),
 #            so it can be launched from the Start menu without signing.
 # -NoSign    skips creating/signing the .msix (layout only).
@@ -13,6 +18,7 @@
 param(
 	[string]$Configuration = 'Release',
 	[string]$Platform = 'x64',
+	[string]$Version,
 	[switch]$Register,
 	[switch]$NoSign
 )
@@ -30,11 +36,30 @@ $pfxPassword = 'uqm-dev'     # local self-signed dev certificate only
 if (-not (Test-Path "$app\UrQuanMasters.exe"))
 { throw "Build UrQuanMastersUWP.vcxproj ($Configuration|$Platform) first." }
 
+if (-not $Version)
+{
+	$now = Get-Date
+	$Version = '{0}.{1}.{2}.{3}' -f $now.Year, $now.Month, $now.Day,
+			($now.Hour * 100 + $now.Minute)
+}
+$parts = $Version -split '\.'
+if ($parts.Count -ne 4 -or ($parts | Where-Object { $_ -notmatch '^\d{1,5}$' -or [int]$_ -gt 65535 }))
+{ throw "Invalid package version '$Version': need four numbers, each 0-65535." }
+
 # --- Assemble the layout ---
 Write-Host "Assembling layout in $layout"
 New-Item -ItemType Directory -Force $layout | Out-Null
 foreach ($f in 'UrQuanMasters.exe', 'AppxManifest.xml', 'resources.pri')
 { Copy-Item "$app\$f" $layout -Force }
+
+# Stamp the packaged manifest only; Package.appxmanifest keeps its placeholder.
+$manifestPath = Join-Path $layout 'AppxManifest.xml'
+$manifest = New-Object xml
+$manifest.PreserveWhitespace = $true
+$manifest.Load($manifestPath)
+$manifest.Package.Identity.Version = $Version
+$manifest.Save($manifestPath)
+Write-Host "Package version $Version"
 $sdlDll = Get-ChildItem "$out\sdl" -Recurse -Filter SDL2.dll | Select-Object -First 1
 if (-not $sdlDll) { throw "SDL2.dll not found under $out\sdl" }
 Copy-Item $sdlDll.FullName $layout -Force
@@ -66,17 +91,17 @@ if (-not $cert)
 			-CertStoreLocation Cert:\CurrentUser\My `
 			-TextExtension @('2.5.29.37={text}1.3.6.1.5.5.7.3.3', '2.5.29.19={text}')
 }
-$pfx = Join-Path $out 'UQM-MegaMod-dev.pfx'
-$cer = Join-Path $out 'UQM-MegaMod-dev.cer'
+$pfx = Join-Path $out 'UQM4K-Xbox-dev.pfx'
+$cer = Join-Path $out 'UQM4K-Xbox-dev.cer'
 Export-PfxCertificate -Cert $cert -FilePath $pfx -Password (ConvertTo-SecureString $pfxPassword -AsPlainText -Force) | Out-Null
 Export-Certificate -Cert $cert -FilePath $cer | Out-Null
 
 # --- Pack and sign ---
-$msix = Join-Path $out 'UQM-MegaMod.msix'
-Write-Host "Packing $msix"
+$msix = Join-Path $out 'UQM4K-Xbox.msix'
+Write-Host "Packing $msix (version $Version)"
 & "$sdkBin\makeappx.exe" pack /d $layout /p $msix /o /h SHA256 | Out-Null
 if ($LASTEXITCODE -ne 0) { throw "makeappx failed ($LASTEXITCODE)" }
 & "$sdkBin\signtool.exe" sign /q /fd SHA256 /f $pfx /p $pfxPassword $msix
 if ($LASTEXITCODE -ne 0) { throw "signtool failed ($LASTEXITCODE)" }
 
-Write-Host ("Done: {0} ({1:N0} MB)" -f $msix, ((Get-Item $msix).Length / 1MB))
+Write-Host ("Done: {0} (version {1}, {2:N0} MB)" -f $msix, $Version, ((Get-Item $msix).Length / 1MB))

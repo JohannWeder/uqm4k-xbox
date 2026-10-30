@@ -6,9 +6,10 @@
   IgnorableNamespaces="uap mp">
 
   <!-- Publisher must match the subject of the signing certificate
-       (see package.ps1). -->
+       (see package.ps1). Version is a placeholder: package.ps1 stamps
+       the packaged copy with the build time, YYYY.MM.DD.HHMM. -->
   <Identity
-    Name="UQM.MegaMod"
+    Name="UQM4K.Xbox"
     Publisher="CN=Johann"
     Version="0.8.6.0" />
 
@@ -16,7 +17,7 @@
 
   <Properties>
     <DisplayName>The Ur-Quan Masters MegaMod</DisplayName>
-    <PublisherDisplayName>Johann</PublisherDisplayName>
+    <PublisherDisplayName>JoFi</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
